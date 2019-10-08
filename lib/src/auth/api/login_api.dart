@@ -15,7 +15,7 @@ class LoginApi extends BaseApi {
     }
     try {
       Response response = await super.httpPost(
-        'https://retail-pre.momentum.co.za/cif/auth/v1/login',
+        'https://jsonplaceholder.typicode.com/auth/v1/login',
         headers: {
           'content-type': 'application/json',
         },
