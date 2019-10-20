@@ -9,26 +9,29 @@ class LoginApi extends BaseApi {
   LoginApi({BaseClient baseClient, TokenStorage tokenStorage})
       : super(baseClient: baseClient, tokenStorage: tokenStorage);
 
-  Future<bool> authenticate({String username, String password}) async {
+  Future<String> authenticate({String username, String password}) async {
     if (username == 'error') {
       throw ApiException(message: 'Error: 400', causedBy: 'bad username');
     }
     try {
       Response response = await super.httpPost(
-        'https://jsonplaceholder.typicode.com/auth/v1/login',
+        'https://reqres.in/api/login',
         headers: {
           'content-type': 'application/json',
         },
         body: jsonEncode({
-          'username': username,
+          'email': username, // valid email for testing: eve.holt@reqres.in
           'password': password,
         }),
       );
-      return response.body !=
-          null; // you probably want to parse this body to an actual object
+
+      var body = jsonDecode(response.body);
+      // Maybe parse to some kind of class representing the full response body
+      return body['token'];
     } on HttpException catch (e) {
-      if (e.statusCode == 401 || e.statusCode == 403) {
-        return false;
+      if (e.statusCode == 400 || e.statusCode == 401 || e.statusCode == 403) {
+        // possible status codes for invalid credentials
+        return null;
       } else {
         throw ApiException(message: 'unexpected response', causedBy: e);
       }
