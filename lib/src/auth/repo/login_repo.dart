@@ -6,7 +6,7 @@ class LoginRepo {
   LoginApi _loginApi;
   LoginRepo({@required LoginApi loginApi}) : _loginApi = loginApi;
 
-  Future<bool> doLogin({String username, String password}) async {
+  Future<String> doLogin({String username, String password}) async {
     try {
       return await _loginApi.authenticate(
         username: username,

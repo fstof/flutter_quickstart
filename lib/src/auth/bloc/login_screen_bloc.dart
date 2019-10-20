@@ -38,8 +38,9 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
   Stream<LoginScreenState> _mapLoginScreenEventLoginPressedToState(
       LoginScreenEventLoginPressed event) async* {
     try {
-      if (await _loginRepo.doLogin(
-          username: event.username, password: event.password)) {
+      var token = await _loginRepo.doLogin(
+          username: event.username, password: event.password);
+      if (token != null) {
         yield LoginScreenStateSuccess();
         _analyticsBloc.dispatch(AnalyticsEventSetUserDetails(
           username: event.username,
