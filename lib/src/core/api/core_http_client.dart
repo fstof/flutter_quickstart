@@ -6,9 +6,9 @@ import '../core.dart';
 
 class CoreHttpClient extends BaseClient {
   final _log = getLogger();
-  CoreHttpClient(this._inner);
-
   final Client _inner;
+
+  CoreHttpClient({Client client}) : this._inner = client;
 
   @override
   Future<StreamedResponse> send(BaseRequest request) async {

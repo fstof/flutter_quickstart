@@ -76,9 +76,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     if (state is LoginScreenStateLoading) {
                       return CircularProgressIndicator();
                     } else {
-                      return RaisedButton(
-                        child: Text('Click to login'),
-                        onPressed: _loginPressed,
+                      return Column(
+                        children: <Widget>[
+                          RaisedButton(
+                            child: Text('Click to login'),
+                            onPressed: _loginPressed,
+                          ),
+                          SizedBox(height: 8),
+                          RaisedButton(
+                            child: Text('OAuth Login'),
+                            onPressed: _loginOAuthPressed,
+                          ),
+                        ],
                       );
                     }
                   },
@@ -97,5 +106,9 @@ class _LoginScreenState extends State<LoginScreen> {
       _usernameController.text,
       _passwordController.text,
     ));
+  }
+
+  void _loginOAuthPressed() async {
+    _loginScreenBloc.dispatch(LoginScreenEventOAuthLoginPressed());
   }
 }

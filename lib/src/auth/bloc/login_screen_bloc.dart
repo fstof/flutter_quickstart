@@ -30,6 +30,8 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
     yield LoginScreenStateLoading();
     if (event is LoginScreenEventLoginPressed) {
       yield* _mapLoginScreenEventLoginPressedToState(event);
+    } else if (event is LoginScreenEventOAuthLoginPressed) {
+      yield* _mapLoginScreenEventOAuthLoginPressedToState(event);
     } else {
       yield* _mapUnhandledEventToState();
     }
@@ -63,6 +65,45 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
     }
   }
 
+  Stream<LoginScreenState> _mapLoginScreenEventOAuthLoginPressedToState(
+      LoginScreenEventOAuthLoginPressed state) async* {
+    try {
+      var token = await _loginRepo.initiateOAuth();
+      if (token != null) {
+        yield LoginScreenStateSuccess();
+
+        logger.i('authorizationAdditionalParameters');
+        token.authorizationAdditionalParameters.forEach((key, val) {
+          logger.d('$key: $val');
+        });
+
+        logger.i('tokenAdditionalParameters');
+        token.tokenAdditionalParameters.forEach((key, val) {
+          logger.d('$key: $val');
+        });
+
+        // _analyticsBloc.dispatch(AnalyticsEventSetUserDetails(
+        //   username: event.username,
+        //   email: event.username,
+        //   userId: event.username,
+        // ));
+        // _analyticsBloc.dispatch(
+        //   AnalyticsEventLogin('usernamePassword', 'success'),
+        // );
+        _applicationBloc
+            .dispatch(ApplicationEventUserLoggedIn(token.accessToken));
+      } else {
+        yield LoginScreenStateError();
+      }
+    } on RepositoryException catch (e) {
+      logger.w('repository failed', e);
+      yield LoginScreenStateError();
+    } catch (e) {
+      logger.e('Unknown error', e);
+      yield LoginScreenStateError();
+    }
+  }
+
   Stream<LoginScreenState> _mapUnhandledEventToState() async* {
     yield LoginScreenStateError();
   }
@@ -79,6 +120,8 @@ class LoginScreenEventLoginPressed extends LoginScreenEvent {
   @override
   List<Object> get props => [username, password];
 }
+
+class LoginScreenEventOAuthLoginPressed extends LoginScreenEvent {}
 
 class LoginScreenState extends Equatable {
   @override

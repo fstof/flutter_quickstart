@@ -2,6 +2,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_performance/firebase_performance.dart';
+import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:flutter_quick_start/src/auth/auth.dart';
 import 'package:flutter_quick_start/src/core/analytics/bloc/analytics_bloc.dart';
 import 'package:flutter_quick_start/src/core/api/core_http_client.dart';
@@ -21,20 +22,37 @@ void setupServiceLocator() {
 
   // Storage / Dao's / Api's
   sl.registerLazySingleton(() => JsonStore());
-  sl.registerLazySingleton(() => TokenStorage(localStorage: sl()));
-  sl.registerLazySingleton(() => ApplicationDao(storage: sl()));
-  sl.registerLazySingleton<BaseClient>(() => CoreHttpClient(Client()));
+  sl.registerLazySingleton(() => TokenStorage(
+        localStorage: sl(),
+      ));
+  sl.registerLazySingleton(() => ApplicationDao(
+        storage: sl(),
+      ));
+  sl.registerLazySingleton<BaseClient>(() => CoreHttpClient(
+        client: Client(),
+      ));
 
   // Login
-  sl.registerLazySingleton(
-      () => LoginApi(baseClient: sl(), tokenStorage: sl()));
-  sl.registerLazySingleton(() => LoginRepo(loginApi: sl()));
+  sl.registerLazySingleton(() => LoginApi(
+        baseClient: sl(),
+        tokenStorage: sl(),
+      ));
+  sl.registerLazySingleton(() => LoginRepo(
+        loginApi: sl(),
+        appAuth: sl(),
+      ));
+  sl.registerLazySingleton(() => FlutterAppAuth());
 
   // Firebase
   sl.registerLazySingleton(() => Crashlytics.instance);
   sl.registerLazySingleton(() => FirebaseAnalytics());
-  sl.registerLazySingleton(() => FirebaseAnalyticsObserver(analytics: sl()));
+  sl.registerLazySingleton(() => FirebaseAnalyticsObserver(
+        analytics: sl(),
+      ));
   sl.registerLazySingleton(() => FirebasePerformance.instance);
   sl.registerLazySingleton(() => AnalyticsBloc(
-      analytics: sl(), analyticsObserver: sl(), crashlytics: sl()));
+        analytics: sl(),
+        analyticsObserver: sl(),
+        crashlytics: sl(),
+      ));
 }
