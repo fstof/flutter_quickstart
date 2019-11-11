@@ -48,7 +48,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>quickstartapp://oauth-callback</string>
+				<string>dev.stofberg.quickstart://oauth-callback</string>
 			</array>
 		</dict>
 	</array>

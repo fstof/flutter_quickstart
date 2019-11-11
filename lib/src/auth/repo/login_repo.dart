@@ -31,7 +31,7 @@ class LoginRepo {
       var result = await _appAuth.authorizeAndExchangeCode(
         AuthorizationTokenRequest(
           'native.code',
-          'quickstartapp://oauth-callback',
+          'dev.stofberg.quickstart://oauth-callback',
           discoveryUrl:
               'https://demo.identityserver.io/.well-known/openid-configuration',
           scopes: ['openid', 'profile', 'email', 'api', 'offline_access'],
