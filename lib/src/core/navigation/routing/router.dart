@@ -24,7 +24,7 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return _buildRoute(SampleNavigationScreen(routeSettings.arguments as int),
           'SampleNavigationScreen', notificationBloc);
     case ROUTE_TABS:
-      return _buildRoute(SampleTabNavigationScreen(sl(), sl()),
+      return _buildRoute(SampleTabNavigationScreen(sl()),
           'SampleTabNavigationScreen', notificationBloc);
     case ROUTE_LOGIN:
       return _buildRoute(LoginScreen(), 'LoginScreen', notificationBloc);

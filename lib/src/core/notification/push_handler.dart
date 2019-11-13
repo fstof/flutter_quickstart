@@ -67,7 +67,7 @@ class PushHandler {
   }
 
   void _handleMessage(Map<String, dynamic> message) {
-    _notificationBloc.dispatch(
+    _notificationBloc.add(
       NotificationEvent(
         title: message['notification']['title'],
         message: message['notification']['body'],

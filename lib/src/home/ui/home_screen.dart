@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
               RaisedButton(
                 child: Text('Notification'),
                 onPressed: () {
-                  _notificationBloc.dispatch(NotificationEvent(
+                  _notificationBloc.add(NotificationEvent(
                     title: 'my title',
                     message: 'hello message',
                   ));
@@ -66,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
               RaisedButton(
                 child: Text('Logout'),
                 onPressed: () {
-                  _applicationBloc.dispatch(ApplicationEventUserLogOut());
+                  _applicationBloc.add(ApplicationEventUserLogOut());
                 },
               ),
             ],

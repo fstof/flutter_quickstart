@@ -10,8 +10,7 @@ import '../bloc/sample_tab_navigation_screen_bloc.dart';
 
 class SampleTabNavigationScreen extends StatefulWidget {
   final FirebaseAnalyticsObserver observer;
-  final AnalyticsBloc _analyticsBloc;
-  SampleTabNavigationScreen(this.observer, this._analyticsBloc);
+  SampleTabNavigationScreen(this.observer);
 
   @override
   _SampleTabNavigationScreenState createState() =>
@@ -22,6 +21,7 @@ class _SampleTabNavigationScreenState extends State<SampleTabNavigationScreen>
     with SingleTickerProviderStateMixin, RouteAware {
   SampleTabNavigationScreenBloc _tabNavigationScreenBloc;
   NavigationService _navigationService;
+  AnalyticsBloc _analyticsBloc;
 
   TabController _controller;
   int selectedIndex = 0;
@@ -29,6 +29,7 @@ class _SampleTabNavigationScreenState extends State<SampleTabNavigationScreen>
   @override
   void initState() {
     super.initState();
+    _analyticsBloc = BlocProvider.of(context);
     _tabNavigationScreenBloc = SampleTabNavigationScreenBloc();
     _navigationService = sl();
     _controller = TabController(
@@ -49,7 +50,7 @@ class _SampleTabNavigationScreenState extends State<SampleTabNavigationScreen>
   @override
   void dispose() {
     super.dispose();
-    _tabNavigationScreenBloc?.dispose();
+    _tabNavigationScreenBloc?.close();
   }
 
   @override
@@ -127,7 +128,7 @@ class _SampleTabNavigationScreenState extends State<SampleTabNavigationScreen>
   }
 
   void _sendCurrentTabToAnalytics() {
-    widget._analyticsBloc.dispatch(
+    _analyticsBloc.add(
       AnalyticsEventScreenView('TabNumber_$selectedIndex'),
     );
   }

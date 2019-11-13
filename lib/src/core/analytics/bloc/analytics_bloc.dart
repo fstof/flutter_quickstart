@@ -82,7 +82,7 @@ class AnalyticsBloc extends Bloc<AnalyticsEvent, AnalyticsStateIdle> {
       );
     }
 
-    yield currentState;
+    yield state;
   }
 }
 

@@ -33,15 +33,15 @@ class _AppState extends State<App> {
     _pushHandler = PushHandler(_notificationBloc, sl());
 
     _pushHandler.setupPush();
-    _applicationBloc.dispatch(ApplicationEventAppStarted());
+    _applicationBloc.add(ApplicationEventAppStarted());
   }
 
   @override
   void dispose() {
     super.dispose();
-    _applicationBloc.dispose();
-    _analyticsBloc.dispose();
-    _notificationBloc.dispose();
+    _applicationBloc.close();
+    _analyticsBloc.close();
+    _notificationBloc.close();
   }
 
   @override

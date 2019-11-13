@@ -3,6 +3,7 @@ import 'package:flutter_quick_start/src/core/core.dart';
 import 'package:flutter_quick_start/src/core/navigation/service/navigation_service.dart';
 
 class SampleNavigationScreen extends StatelessWidget {
+  final _log = getLogger();
   final NavigationService nav = sl();
   final int someNumber;
 
@@ -29,10 +30,13 @@ class SampleNavigationScreen extends StatelessWidget {
             ),
             RaisedButton(
               child: Text('Go forward and wait for a result'),
-              onPressed: () async => await nav.navigateForward(
-                ROUTE_NAVS,
-                arguments: someNumber + 1,
-              ),
+              onPressed: () async {
+                var ans = await nav.navigateForward(
+                  ROUTE_NAVS,
+                  arguments: someNumber + 1,
+                );
+                _log.i('nav came back with answer $ans');
+              },
             ),
             RaisedButton(
               child: Text('Go backward'),

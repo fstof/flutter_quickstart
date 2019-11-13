@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void dispose() {
     super.dispose();
-    _loginScreenBloc.dispose();
+    _loginScreenBloc.close();
   }
 
   @override
@@ -93,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _loginPressed() {
-    _loginScreenBloc.dispatch(LoginScreenEventLoginPressed(
+    _loginScreenBloc.add(LoginScreenEventLoginPressed(
       _usernameController.text,
       _passwordController.text,
     ));
