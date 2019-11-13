@@ -13,12 +13,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   NavigationService _navigationService;
   ApplicationBloc _applicationBloc;
+  NotificationBloc _notificationBloc;
 
   @override
   void initState() {
     super.initState();
     _navigationService = sl();
     _applicationBloc = BlocProvider.of(context);
+    _notificationBloc = BlocProvider.of(context);
   }
 
   @override
@@ -50,6 +52,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Text('Crash!'),
                 onPressed: () {
                   sl<Crashlytics>().crash();
+                },
+              ),
+              RaisedButton(
+                child: Text('Notification'),
+                onPressed: () {
+                  _notificationBloc.dispatch(NotificationEvent(
+                    title: 'my title',
+                    message: 'hello message',
+                  ));
                 },
               ),
               RaisedButton(

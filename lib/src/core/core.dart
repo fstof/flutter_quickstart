@@ -4,3 +4,4 @@ export 'exception/exceptions.dart';
 export 'logging/logger.dart';
 export 'navigation/routing/route_names.dart';
 export 'navigation/service/navigation_service.dart';
+export 'notification/notification_bloc.dart';

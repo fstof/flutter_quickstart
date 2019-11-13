@@ -13,12 +13,12 @@ A new Flutter project.
 - Firebase - Analytics
 - Firebase - Crash Reporting
 - Firebase - Performance Monitoring
+- Firebase - Push Notifications
+- OAuth2 login sample (check the branch)
 
 ## TODO
-- Firebase - Push Notifications
 - Firebase - In App Notification
 - Firebase - Remote Config
-- OAuth2 login sample
 - Unit Tests
 
 

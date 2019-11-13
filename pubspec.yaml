@@ -21,7 +21,9 @@ dependencies:
   firebase_analytics:
   firebase_core:
   firebase_crashlytics:
+  firebase_messaging:
   firebase_performance:
+  flushbar:
   flutter:
     sdk: flutter
   flutter_bloc:
