@@ -6,6 +6,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:meta/meta.dart';
+import 'package:rxdart/rxdart.dart';
 
 class AnalyticsBloc extends Bloc<AnalyticsEvent, AnalyticsStateIdle> {
   final FirebaseAnalytics _analytics;
@@ -24,21 +25,27 @@ class AnalyticsBloc extends Bloc<AnalyticsEvent, AnalyticsStateIdle> {
   AnalyticsStateIdle get initialState =>
       AnalyticsStateIdle(analyticsObserver: _analyticsObserver);
 
-  // @override
-  // Stream<AnalyticsState> transform(events, next) {
-  //   final observableStream = events as Observable<AnalyticsEvent>;
+  /// We need to debounce some analytics events as they could fire way to quick after another (like search while typing)
+  @override
+  Stream<AnalyticsStateIdle> transformEvents(Stream<AnalyticsEvent> events,
+      Stream<AnalyticsStateIdle> Function(AnalyticsEvent event) next) {
+    final observableStream = events as Observable<AnalyticsEvent>;
 
-  //   final nonDebounceStream = observableStream.where((event) {
-  //     return (event is! AnalyticsEventSearch);
-  //   });
+    final debounceStream = observableStream.where((event) {
+      return (event is AnalyticsEventSearch);
+    }).debounceTime(
+      Duration(seconds: 2),
+    );
 
-  //   final debounceStream = observableStream.where((event) {
-  //     return (event is AnalyticsEventSearch);
-  //   }).debounceTime(
-  //     Duration(seconds: 2),
-  //   );
-  //   return super.transform(nonDebounceStream.mergeWith([debounceStream]), next);
-  // }
+    final nonDebounceStream = observableStream.where((event) {
+      return (event is! AnalyticsEventSearch);
+    });
+
+    return super.transformEvents(
+      nonDebounceStream.mergeWith([debounceStream]),
+      next,
+    );
+  }
 
   @override
   Stream<AnalyticsStateIdle> mapEventToState(AnalyticsEvent event) async* {
