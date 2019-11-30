@@ -21,6 +21,7 @@ dependencies:
   firebase_analytics:
   firebase_core:
   firebase_crashlytics:
+  firebase_in_app_messaging:
   firebase_messaging:
   firebase_performance:
   flushbar:

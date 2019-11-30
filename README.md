@@ -14,10 +14,10 @@ A new Flutter project.
 - Firebase - Crash Reporting
 - Firebase - Performance Monitoring
 - Firebase - Push Notifications
+- Firebase - In App Notification
 - OAuth2 login sample (check the branch)
 
 ## TODO
-- Firebase - In App Notification
 - Firebase - Remote Config
 - Unit Tests
 
