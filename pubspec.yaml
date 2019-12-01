@@ -24,6 +24,7 @@ dependencies:
   firebase_in_app_messaging:
   firebase_messaging:
   firebase_performance:
+  firebase_remote_config:
   flushbar:
   flutter:
     sdk: flutter

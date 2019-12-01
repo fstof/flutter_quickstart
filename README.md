@@ -19,6 +19,7 @@ A new Flutter project.
 
 ## TODO
 - Firebase - Remote Config
+- Flavors
 - Unit Tests
 
 

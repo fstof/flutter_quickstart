@@ -15,6 +15,13 @@ void main() {
   // Pass all uncaught errors from the framework to Crashlytics.
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
 
+  FlavorConfig(
+    flavor: Flavor.NONPROD,
+    values: FlavorValues(
+      someFlavorConfig: true,
+    ),
+  );
+
   setupServiceLocator();
   runZoned<Future<void>>(() async {
     runApp(App());

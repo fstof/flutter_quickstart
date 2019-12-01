@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_quick_start/src/core/api/base_api.dart';
+import 'package:flutter_quick_start/src/core/core.dart';
 import 'package:flutter_quick_start/src/core/exception/exceptions.dart';
 import 'package:flutter_quick_start/src/core/storage/token_storage.dart';
 import 'package:http/http.dart';
@@ -15,10 +16,8 @@ class LoginApi extends BaseApi {
     }
     try {
       Response response = await super.httpPost(
-        'https://reqres.in/api/login',
-        headers: {
-          'content-type': 'application/json',
-        },
+        '${sl<AppConfig>().apiBaseUrl}/api/login',
+        headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'email': username, // valid email for testing: eve.holt@reqres.in
           'password': password,

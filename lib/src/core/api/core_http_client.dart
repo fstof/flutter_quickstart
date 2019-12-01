@@ -54,19 +54,17 @@ class CoreHttpClient extends BaseClient {
         ..httpResponseCode = response.statusCode;
 
       if (response.statusCode == 401 || response.statusCode == 403) {
-        sl<Crashlytics>().log(
-            'Auth error when calling ${request.url.toString()} - [${response.statusCode}]');
-        await sl<Crashlytics>().recordError(
-          Exception('Unauthorised exception backend failure'),
-          StackTrace.fromString('No Stack available'),
-          context: 'CoreHttpClient',
-        );
-      } else if (response.statusCode == 404) {
         _log.w(
-            '[API_ERROR] Not Found: ${request.url.toString()} - [${response.statusCode}]');
-      } else if (response.statusCode > 299) {
-        sl<Crashlytics>().log(
-            'A backend failure occurred when calling ${request.url.toString()} - [${response.statusCode}]');
+          '[API_ERROR] in ${DateTime.now().millisecondsSinceEpoch - start} ms: Auth error when calling ${request.url.toString()} - [${response.statusCode}]',
+        );
+      } else if (response.statusCode >= 400 && response.statusCode < 500) {
+        _log.w(
+          '[API_ERROR] in ${DateTime.now().millisecondsSinceEpoch - start} ms: Input error: ${request.url.toString()} - [${response.statusCode}]',
+        );
+      } else if (response.statusCode >= 500) {
+        _log.e(
+          '[API_ERROR] in ${DateTime.now().millisecondsSinceEpoch - start} ms: A backend failure occurred when calling ${request.url.toString()} - [${response.statusCode}]',
+        );
         await sl<Crashlytics>().recordError(
           Exception('Backend Failure'),
           StackTrace.fromString('No Stack available'),
@@ -76,11 +74,9 @@ class CoreHttpClient extends BaseClient {
       return response;
     } catch (error) {
       _log.e(
-        '[API_ERROR] error in ${DateTime.now().millisecondsSinceEpoch - start} ms. error: ${error.toString()}',
+        '[API_ERROR] error in ${DateTime.now().millisecondsSinceEpoch - start} ms. An Exception occurred when calling ${request.url.toString()}}',
         error,
       );
-      sl<Crashlytics>()
-          .log('An Exception occurred when calling ${request.url.toString()}');
       await sl<Crashlytics>().recordError(
         error,
         StackTrace.fromString('No Stack available'),

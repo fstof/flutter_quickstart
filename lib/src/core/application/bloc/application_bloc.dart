@@ -8,6 +8,8 @@ import '../dao/application_dao.dart';
 
 class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
   final logger = getLogger();
+  final RemoteConfig _remoteConfig = sl();
+  final AppConfig _appConfig = sl();
 
   ApplicationDao _applicationDao;
   ApplicationBloc({@required ApplicationDao applicationDao})
@@ -33,6 +35,9 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
   Stream<ApplicationState> _mapApplicationEventAppStartedToState(
       ApplicationEventAppStarted event) async* {
     try {
+      await _remoteConfig.initialise(FlavorConfig.isProd());
+      _appConfig.initialise();
+
       String user = await _applicationDao.getCurrentUser();
       if (user != null) {
         yield ApplicationStateLoggedIn(user);

@@ -12,6 +12,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   ApplicationBloc _applicationBloc;
   AnalyticsBloc _analyticsBloc;
+  NotificationBloc _notificationBloc;
   LoginScreenBloc _loginScreenBloc;
 
   var _usernameController = TextEditingController();
@@ -22,6 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
     _applicationBloc = BlocProvider.of(context);
     _analyticsBloc = BlocProvider.of(context);
+    _notificationBloc = BlocProvider.of(context);
     _loginScreenBloc = LoginScreenBloc(
       applicationBloc: _applicationBloc,
       analyticsBloc: _analyticsBloc,
@@ -43,9 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
         bloc: _loginScreenBloc,
         listener: (context, LoginScreenState state) {
           if (state is LoginScreenStateError) {
-            Scaffold.of(context).showSnackBar(SnackBar(
-              content: Text('Login Failed'),
-            ));
+            _notificationBloc.add(NotificationEvent(message: 'Login Failed'));
           }
         },
         child: Container(

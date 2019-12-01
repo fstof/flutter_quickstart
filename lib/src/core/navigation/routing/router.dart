@@ -12,29 +12,44 @@ import '../ui/unknown_route.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   final logger = getLogger();
-  final NotificationBloc notificationBloc = sl();
 
   logger.d('navigating to ${routeSettings.name}');
   switch (routeSettings.name) {
     case ROUTE_SPLASH:
-      return _buildRoute(SplashScreen(), 'SplashScreen', notificationBloc);
+      return _buildRoute(
+        SplashScreen(),
+        'SplashScreen',
+      );
     case ROUTE_HOME:
-      return _buildRoute(HomeScreen(), 'HomeScreen', notificationBloc);
+      return _buildRoute(
+        HomeScreen(),
+        'HomeScreen',
+      );
     case ROUTE_NAVS:
-      return _buildRoute(SampleNavigationScreen(routeSettings.arguments as int),
-          'SampleNavigationScreen', notificationBloc);
+      return _buildRoute(
+        SampleNavigationScreen(routeSettings.arguments as int),
+        'SampleNavigationScreen',
+      );
     case ROUTE_TABS:
-      return _buildRoute(SampleTabNavigationScreen(sl()),
-          'SampleTabNavigationScreen', notificationBloc);
+      return _buildRoute(
+        SampleTabNavigationScreen(sl()),
+        'SampleTabNavigationScreen',
+      );
     case ROUTE_LOGIN:
-      return _buildRoute(LoginScreen(), 'LoginScreen', notificationBloc);
+      return _buildRoute(
+        LoginScreen(),
+        'LoginScreen',
+      );
     default:
-      return _buildRoute(UnknownRoute(), 'UnknownRoute', notificationBloc);
+      return _buildRoute(
+        UnknownRoute(),
+        'UnknownRoute',
+      );
   }
 }
 
-Route _buildRoute(
-    Widget child, String name, NotificationBloc notificationBloc) {
+Route _buildRoute(Widget child, String name) {
+  final logger = getLogger();
   return MaterialPageRoute(
     settings: RouteSettings(name: name),
     builder: (context) => BlocListener<NotificationBloc, NotificationState>(
@@ -48,7 +63,7 @@ Route _buildRoute(
           );
           await flush.show(context);
         } catch (error) {
-          print(error);
+          logger.e(error);
         }
       },
       child: child,

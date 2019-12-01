@@ -14,6 +14,16 @@ class CustomLogger extends Logger {
   void log(Level level, message, [error, StackTrace stackTrace]) {
     super.log(level, message, error, stackTrace);
     _crashlytics.log('[$level] - $message');
+    // Whe might want to auto record crashlytics on errors???
+    // if (error != null) {
+    //   _crashlytics.recordError(
+    //     error,
+    //     stackTrace != null
+    //         ? stackTrace
+    //         : StackTrace.fromString('No Stack available'),
+    //     context: 'CustomLogger error print',
+    //   );
+    // }
   }
 }
 
