@@ -15,11 +15,14 @@ A new Flutter project.
 - Firebase - Performance Monitoring
 - Firebase - Push Notifications
 - Firebase - In App Notification
-- OAuth2 login sample (check the branch)
+- Firebase - Remote Config
+- Simple login
+- OAuth2 login (check the branch)
 
 ## TODO
-- Firebase - Remote Config
+- Improve http by using `dio`
 - Flavors
+- Themes
 - Unit Tests
 
 
