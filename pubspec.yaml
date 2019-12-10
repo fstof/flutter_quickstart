@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
+  dio:
   equatable:
   firebase_analytics:
   firebase_core:
@@ -30,7 +31,6 @@ dependencies:
     sdk: flutter
   flutter_bloc:
   get_it:
-  http:
   json_store:
   logger:
 

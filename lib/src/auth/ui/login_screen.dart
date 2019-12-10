@@ -15,8 +15,8 @@ class _LoginScreenState extends State<LoginScreen> {
   NotificationBloc _notificationBloc;
   LoginScreenBloc _loginScreenBloc;
 
-  var _usernameController = TextEditingController();
-  var _passwordController = TextEditingController();
+  var _usernameController = TextEditingController(text: 'eve.holt@reqres.in');
+  var _passwordController = TextEditingController(text: 'password');
 
   @override
   void initState() {

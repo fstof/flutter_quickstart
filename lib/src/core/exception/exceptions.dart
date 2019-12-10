@@ -1,4 +1,4 @@
-import 'package:http/http.dart';
+
 
 abstract class BaseException implements Exception {
   final String message;
@@ -21,17 +21,17 @@ class ApiException extends BaseException {
       : super(message: message, causedBy: causedBy);
 }
 
-class HttpException extends BaseException {
-  Response response;
-  int statusCode;
-  String body;
-  HttpException({this.response, this.statusCode, this.body, message, causedBy})
-      : super(message: message, causedBy: causedBy);
-  @override
-  String toString() {
-    return '${super.toString()}\n[status]: $statusCode\n[body]: $body'; // printing out $body might be a bit too much change as you like
-  }
-}
+// class HttpException extends BaseException {
+//   Response response;
+//   int statusCode;
+//   String body;
+//   HttpException({this.response, this.statusCode, this.body, message, causedBy})
+//       : super(message: message, causedBy: causedBy);
+//   @override
+//   String toString() {
+//     return '${super.toString()}\n[status]: $statusCode\n[body]: $body'; // printing out $body might be a bit too much change as you like
+//   }
+// }
 
 class RepositoryException extends BaseException {
   RepositoryException({message, causedBy})
