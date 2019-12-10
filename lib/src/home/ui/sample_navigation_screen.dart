@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quick_start/src/core/core.dart';
 import 'package:flutter_quick_start/src/core/navigation/service/navigation_service.dart';
+import 'package:provider/provider.dart';
 
-class SampleNavigationScreen extends StatelessWidget {
-  final _log = getLogger();
-  final NavigationService nav = sl();
+class SampleNavigationScreen extends StatefulWidget {
   final int someNumber;
-
   SampleNavigationScreen(this.someNumber);
+
+  @override
+  _SampleNavigationScreenState createState() => _SampleNavigationScreenState();
+}
+
+class _SampleNavigationScreenState extends State<SampleNavigationScreen> {
+  final _log = getLogger();
+
+  NavigationService nav;
+
+  @override
+  void initState() {
+    super.initState();
+    nav = Provider.of(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +31,14 @@ class SampleNavigationScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Your number is $someNumber',
+              'Your number is ${widget.someNumber}',
               style: Theme.of(context).textTheme.title,
             ),
             RaisedButton(
               child: Text('Go forward'),
               onPressed: () => nav.navigateForward(
                 ROUTE_NAVS,
-                arguments: someNumber + 1,
+                arguments: widget.someNumber + 1,
               ),
             ),
             RaisedButton(
@@ -33,27 +46,27 @@ class SampleNavigationScreen extends StatelessWidget {
               onPressed: () async {
                 var ans = await nav.navigateForward(
                   ROUTE_NAVS,
-                  arguments: someNumber + 1,
+                  arguments: widget.someNumber + 1,
                 );
                 _log.i('nav came back with answer $ans');
               },
             ),
             RaisedButton(
               child: Text('Go backward'),
-              onPressed: () => nav.goBack(someNumber),
+              onPressed: () => nav.goBack(widget.someNumber),
             ),
             RaisedButton(
               child: Text('Replace this'),
               onPressed: () => nav.navigateReplacement(
                 ROUTE_NAVS,
-                arguments: someNumber + 1,
+                arguments: widget.someNumber + 1,
               ),
             ),
             RaisedButton(
               child: Text('Replace root'),
               onPressed: () => nav.navigateRootReplacement(
                 ROUTE_NAVS,
-                arguments: someNumber + 1,
+                arguments: widget.someNumber + 1,
               ),
             ),
             RaisedButton(

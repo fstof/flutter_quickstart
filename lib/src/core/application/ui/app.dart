@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quick_start/src/core/analytics/bloc/analytics_bloc.dart';
 import 'package:flutter_quick_start/src/core/notification/push_handler.dart';
+import 'package:provider/provider.dart';
 
 import '../../core.dart';
 import '../../navigation/routing/router.dart';
@@ -22,7 +23,8 @@ class _AppState extends State<App> {
   @override
   void initState() {
     super.initState();
-    _navigationService = sl();
+    // _navigationService = sl();
+    _navigationService = NavigationService();
     _applicationBloc = ApplicationBloc(applicationDao: sl());
     _analyticsBloc = AnalyticsBloc(
       analytics: sl(),
@@ -46,38 +48,40 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-        providers: [
-          // BlocProvider.value(value: _applicationBloc),
-          // BlocProvider.value(value: _analyticsBloc),
-          // BlocProvider.value(value: _notificationBloc),
-          BlocProvider<ApplicationBloc>(builder: (_) => _applicationBloc),
-          BlocProvider<AnalyticsBloc>(builder: (_) => _analyticsBloc),
-          BlocProvider<NotificationBloc>(builder: (_) => _notificationBloc),
-        ],
-        child: MultiBlocListener(
-          listeners: [
-            BlocListener<ApplicationBloc, ApplicationState>(
-              bloc: _applicationBloc,
-              listener: (_, state) {
-                if (state is ApplicationStateLoggedIn) {
-                  _navigationService.navigateReplacement(ROUTE_HOME);
-                } else if (state is ApplicationStateLoggedOut) {
-                  _navigationService.navigateReplacement(ROUTE_LOGIN);
-                }
-              },
-            ),
+    return MultiProvider(
+      providers: [
+        Provider<NavigationService>(create: (_) => _navigationService),
+      ],
+      child: MultiBlocProvider(
+          providers: [
+            BlocProvider<ApplicationBloc>(create: (_) => _applicationBloc),
+            BlocProvider<AnalyticsBloc>(create: (_) => _analyticsBloc),
+            BlocProvider<NotificationBloc>(create: (_) => _notificationBloc),
           ],
-          child: MaterialApp(
-            title: 'Flutter Quick Start',
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
+          child: MultiBlocListener(
+            listeners: [
+              BlocListener<ApplicationBloc, ApplicationState>(
+                bloc: _applicationBloc,
+                listener: (_, state) {
+                  if (state is ApplicationStateLoggedIn) {
+                    _navigationService.navigateReplacement(ROUTE_HOME);
+                  } else if (state is ApplicationStateLoggedOut) {
+                    _navigationService.navigateReplacement(ROUTE_LOGIN);
+                  }
+                },
+              ),
+            ],
+            child: MaterialApp(
+              title: 'Flutter Quick Start',
+              theme: ThemeData(
+                primarySwatch: Colors.blue,
+              ),
+              navigatorObservers: [sl<FirebaseAnalyticsObserver>()],
+              initialRoute: ROUTE_SPLASH,
+              navigatorKey: _navigationService.navigatorKey,
+              onGenerateRoute: generateRoute,
             ),
-            navigatorObservers: [sl<FirebaseAnalyticsObserver>()],
-            initialRoute: ROUTE_SPLASH,
-            navigatorKey: _navigationService.navigatorKey,
-            onGenerateRoute: generateRoute,
-          ),
-        ));
+          )),
+    );
   }
 }

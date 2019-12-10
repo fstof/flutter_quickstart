@@ -4,6 +4,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quick_start/src/core/core.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -18,13 +19,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _navigationService = sl();
+    // _navigationService = sl();
+
     _applicationBloc = BlocProvider.of(context);
     _notificationBloc = BlocProvider.of(context);
   }
 
   @override
   Widget build(BuildContext context) {
+    _navigationService = Provider.of(context);
     return Scaffold(
       appBar: AppBar(title: Text('Home')),
       body: Container(

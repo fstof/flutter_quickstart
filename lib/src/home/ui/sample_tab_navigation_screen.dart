@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quick_start/src/core/analytics/bloc/analytics_bloc.dart';
 import 'package:flutter_quick_start/src/core/core.dart';
+import 'package:provider/provider.dart';
 
 import '../bloc/sample_tab_navigation_screen_bloc.dart';
 
@@ -31,7 +32,8 @@ class _SampleTabNavigationScreenState extends State<SampleTabNavigationScreen>
     super.initState();
     _analyticsBloc = BlocProvider.of(context);
     _tabNavigationScreenBloc = SampleTabNavigationScreenBloc();
-    _navigationService = sl();
+    // _navigationService = sl();
+    _navigationService = Provider.of(context);
     _controller = TabController(
       vsync: this,
       length: 2,
