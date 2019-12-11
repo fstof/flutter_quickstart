@@ -7,7 +7,7 @@ import '../../exception/exceptions.dart';
 import '../dao/application_dao.dart';
 
 class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
-  final logger = getLogger();
+  final _logger = getLogger();
   final RemoteConfig _remoteConfig = sl();
   final AppConfig _appConfig = sl();
 
@@ -45,10 +45,10 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
         yield ApplicationStateLoggedOut();
       }
     } on DaoException catch (e) {
-      logger.w('storage failed', e);
+      _logger.w('storage failed', e);
       yield ApplicationStateLoggedOut();
     } catch (e) {
-      logger.e('Unknown error', e);
+      _logger.e('Unknown error', e);
       yield ApplicationStateLoggedOut();
     }
   }
@@ -59,10 +59,10 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
       await _applicationDao.storeCurrentUser(event.loggedInUser);
       yield ApplicationStateLoggedIn(event.loggedInUser);
     } on DaoException catch (e) {
-      logger.w('storage failed', e);
+      _logger.w('storage failed', e);
       yield ApplicationStateLoggedOut();
     } catch (e) {
-      logger.e('unknown error', e);
+      _logger.e('unknown error', e);
       yield ApplicationStateLoggedOut();
     }
   }
@@ -73,10 +73,10 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
       await _applicationDao.removeCurrentUser();
       yield ApplicationStateLoggedOut();
     } on DaoException catch (e) {
-      logger.w('storage failed', e);
+      _logger.w('storage failed', e);
       yield ApplicationStateLoggedOut();
     } catch (e) {
-      logger.e('unknown error', e);
+      _logger.e('unknown error', e);
       yield ApplicationStateLoggedOut();
     }
   }

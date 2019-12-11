@@ -4,7 +4,7 @@ import './remote_config.dart';
 import '../core.dart';
 
 class AppConfig {
-  final _log = getLogger();
+  final _logger = getLogger();
 
   final RemoteConfig _remoteConfig;
   AppConfig({@required RemoteConfig remoteConfig})
@@ -19,6 +19,6 @@ class AppConfig {
     someConfig = _remoteConfig.getBool(RemoteConfig.config_one);
     anotherConfig = _remoteConfig.getString(RemoteConfig.config_two);
     apiBaseUrl = _remoteConfig.getString(RemoteConfig.api_base_url);
-    _log.i('config initialised');
+    _logger.i('config initialised');
   }
 }

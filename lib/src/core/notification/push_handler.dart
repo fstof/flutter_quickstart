@@ -4,7 +4,7 @@ import '../logging/logger.dart';
 import 'notification_bloc.dart';
 
 class PushHandler {
-  final _log = getLogger();
+  final _logger = getLogger();
 
   static PushHandler _instance;
 
@@ -31,7 +31,7 @@ class PushHandler {
   // : _context = context,
   : _notificationBloc = notificationBloc,
         _firebaseMessaging = firebaseMessaging {
-    _log.i('PushHandler created');
+    _logger.i('PushHandler created');
   }
 
   void setupPush() {
@@ -43,7 +43,7 @@ class PushHandler {
   }
 
   Future<void> _handleOnMessage(Map<String, dynamic> message) async {
-    _log.i('Message received onMessage ${message.toString()}');
+    _logger.i('Message received onMessage ${message.toString()}');
     if (message['data'] == null) {
       message = {'data': message};
     }
@@ -51,7 +51,7 @@ class PushHandler {
   }
 
   Future<void> _handleOnResume(Map<String, dynamic> message) async {
-    _log.i('Message received onResume ${message.toString()}');
+    _logger.i('Message received onResume ${message.toString()}');
     if (message['data'] == null) {
       message = {'data': message};
     }
@@ -59,7 +59,7 @@ class PushHandler {
   }
 
   Future<void> _handleOnLaunch(Map<String, dynamic> message) async {
-    _log.i('Message received onLaunch ${message.toString()}');
+    _logger.i('Message received onLaunch ${message.toString()}');
     if (message['data'] == null) {
       message = {'data': message};
     }

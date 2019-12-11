@@ -7,7 +7,7 @@ import 'package:flutter_quick_start/src/core/core.dart';
 import 'package:flutter_quick_start/src/core/exception/exceptions.dart';
 
 class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
-  final logger = getLogger();
+  final _logger = getLogger();
 
   ApplicationBloc _applicationBloc;
   AnalyticsBloc _analyticsBloc;
@@ -55,10 +55,10 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
         yield LoginScreenStateError();
       }
     } on RepositoryException catch (e) {
-      logger.w('repository failed', e);
+      _logger.w('repository failed', e);
       yield LoginScreenStateError();
     } catch (e) {
-      logger.e('Unknown error', e);
+      _logger.e('Unknown error', e);
       yield LoginScreenStateError();
     }
   }

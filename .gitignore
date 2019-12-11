@@ -75,3 +75,4 @@
 # Firebase private stuff
 **/ios/**/GoogleService-Info.plist
 **/android/**/google-services.json
+.flutter-plugins-dependencies

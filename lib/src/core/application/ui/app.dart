@@ -76,7 +76,7 @@ class _AppState extends State<App> {
             navigatorObservers: [sl<FirebaseAnalyticsObserver>()],
             initialRoute: ROUTE_SPLASH,
             navigatorKey: _navigationService.navigatorKey,
-            onGenerateRoute: generateRoute,
+            onGenerateRoute: Router.generateRoute,
           ),
         ));
   }

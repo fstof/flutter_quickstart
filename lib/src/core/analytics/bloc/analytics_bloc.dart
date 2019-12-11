@@ -50,46 +50,83 @@ class AnalyticsBloc extends Bloc<AnalyticsEvent, AnalyticsStateIdle> {
   @override
   Stream<AnalyticsStateIdle> mapEventToState(AnalyticsEvent event) async* {
     if (event is AnalyticsEventSetUserDetails) {
-      await _analytics.setUserId(event.userId);
-      await _crashlytics.setUserIdentifier(event.userId);
-      await _crashlytics.setUserEmail(event.email);
-      await _crashlytics.setUserName(event.username);
+      await _mapAnalyticsEventSetUserDetailsToState(event);
     } else if (event is AnalyticsEventSetUserProperty) {
-      await _analytics.setUserProperty(
-        name: event.name,
-        value: event.value,
-      );
+      await _mapAnalyticsEventSetUserPropertyToState(event);
     } else if (event is AnalyticsEventLogin) {
-      await _analytics.logEvent(name: 'login', parameters: {
-        'method': event.method,
-        'status': event.status,
-      });
+      await _mapAnalyticsEventLoginToState(event);
     } else if (event is AnalyticsEventScreenView) {
-      await _analytics.setCurrentScreen(screenName: event.screenName);
+      await _mapAnalyticsEventScreenViewToState(event);
     } else if (event is AnalyticsEventSearch) {
-      await _analytics.logSearch(
-        origin: event.searchCategory?.toString(),
-        searchTerm: event.searchTerm,
-      );
+      await _mapAnalyticsEventSearchToState(event);
     } else if (event is AnalyticsEventViewItemList) {
-      await _analytics.logViewItemList(
-        itemCategory: event.itemCategory?.toString(),
-      );
+      await _mapAnalyticsEventViewItemListToState(event);
     } else if (event is AnalyticsEventViewItem) {
-      await _analytics.logViewItem(
-        itemName: event.itemName,
-        itemCategory: event.itemCategory?.toString(),
-        itemId: event.itemId,
-        searchTerm: event.searchTerm,
-      );
+      await _mapAnalyticsEventViewItemToState(event);
     } else if (event is AnalyticsEventSelectContent) {
-      await _analytics.logSelectContent(
-        contentType: event.contentType,
-        itemId: event.itemId,
-      );
+      await _mapAnalyticsEventSelectContentToState(event);
     }
 
     yield state;
+  }
+
+  Future _mapAnalyticsEventSelectContentToState(
+      AnalyticsEventSelectContent event) async {
+    await _analytics.logSelectContent(
+      contentType: event.contentType,
+      itemId: event.itemId,
+    );
+  }
+
+  Future _mapAnalyticsEventViewItemToState(AnalyticsEventViewItem event) async {
+    await _analytics.logViewItem(
+      itemName: event.itemName,
+      itemCategory: event.itemCategory?.toString(),
+      itemId: event.itemId,
+      searchTerm: event.searchTerm,
+    );
+  }
+
+  Future _mapAnalyticsEventViewItemListToState(
+      AnalyticsEventViewItemList event) async {
+    await _analytics.logViewItemList(
+      itemCategory: event.itemCategory?.toString(),
+    );
+  }
+
+  Future _mapAnalyticsEventSearchToState(AnalyticsEventSearch event) async {
+    await _analytics.logSearch(
+      origin: event.searchCategory?.toString(),
+      searchTerm: event.searchTerm,
+    );
+  }
+
+  Future _mapAnalyticsEventScreenViewToState(
+      AnalyticsEventScreenView event) async {
+    await _analytics.setCurrentScreen(screenName: event.screenName);
+  }
+
+  Future _mapAnalyticsEventLoginToState(AnalyticsEventLogin event) async {
+    await _analytics.logEvent(name: 'login', parameters: {
+      'method': event.method,
+      'status': event.status,
+    });
+  }
+
+  Future _mapAnalyticsEventSetUserPropertyToState(
+      AnalyticsEventSetUserProperty event) async {
+    await _analytics.setUserProperty(
+      name: event.name,
+      value: event.value,
+    );
+  }
+
+  Future _mapAnalyticsEventSetUserDetailsToState(
+      AnalyticsEventSetUserDetails event) async {
+    await _analytics.setUserId(event.userId.replaceAll(RegExp('[@\.]'), '_'));
+    await _crashlytics.setUserIdentifier(event.userId);
+    await _crashlytics.setUserEmail(event.email);
+    await _crashlytics.setUserName(event.username);
   }
 }
 

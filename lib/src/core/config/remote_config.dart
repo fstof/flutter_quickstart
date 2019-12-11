@@ -7,7 +7,7 @@ class RemoteConfig {
   static const config_two = 'config_two';
   static const api_base_url = 'api_base_url';
 
-  final _log = getLogger();
+  final _logger = getLogger();
   static RemoteConfig _instance;
 
   frc.RemoteConfig _remoteConfig;
@@ -34,7 +34,7 @@ class RemoteConfig {
 
   Future<RemoteConfig> initialise([bool prod = false]) async {
     _remoteConfig = await frc.RemoteConfig.instance;
-    _log.d('setting default remote config for ${prod ? 'prod' : 'nonprod'}');
+    _logger.d('setting default remote config for ${prod ? 'prod' : 'nonprod'}');
     await _remoteConfig.setDefaults(prod ? _defaultsProd : _defaultsNonProd);
     // TODO skip fetching remote values until loaded into Firebase
     // await _remoteConfig
@@ -48,7 +48,7 @@ class RemoteConfig {
     //   _log.e('fetch failed, using defaults, $error', error);
     // }
     // await _remoteConfig.activateFetched();
-    _log.d('activated remote config');
+    _logger.d('activated remote config');
     return _instance;
   }
 
