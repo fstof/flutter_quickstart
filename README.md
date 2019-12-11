@@ -18,9 +18,9 @@ A new Flutter project.
 - Firebase - Remote Config
 - Simple login
 - OAuth2 login (check the branch)
+- HTTP using `dio`
 
 ## TODO
-- Improve http by using `dio`
 - Flavors
 - Themes
 - Unit Tests
