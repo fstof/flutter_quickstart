@@ -6,9 +6,7 @@ class SampleTabNavigationScreenBloc extends Bloc<TabEvent, TabState> {
   TabState get initialState => TabState(0);
 
   @override
-  Stream<TabState> mapEventToState(
-    TabEvent event,
-  ) async* {
+  Stream<TabState> mapEventToState(TabEvent event) async* {
     yield (TabState(event.newTab));
   }
 }
@@ -18,11 +16,15 @@ class TabEvent extends Equatable {
   TabEvent(this.newTab);
   @override
   List<Object> get props => [newTab];
+  @override
+  String toString() => newTab.toString();
 }
 
 class TabState extends Equatable {
-  final currentTab;
+  final int currentTab;
   TabState(this.currentTab);
   @override
   List<Object> get props => [currentTab];
+  @override
+  String toString() => currentTab.toString();
 }

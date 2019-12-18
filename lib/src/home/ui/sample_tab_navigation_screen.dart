@@ -69,7 +69,7 @@ class _SampleTabNavigationScreenState extends State<SampleTabNavigationScreen>
               Center(
                   child: Column(
                 children: <Widget>[
-                  Text('AC'),
+                  Text('AC Page'),
                   RaisedButton(
                     child: Text('Navigation Sample screen'),
                     onPressed: () {
@@ -84,7 +84,7 @@ class _SampleTabNavigationScreenState extends State<SampleTabNavigationScreen>
               Center(
                   child: Column(
                 children: <Widget>[
-                  Text('Alarm'),
+                  Text('Alarm Page'),
                   RaisedButton(
                     child: Text('Navigation Sample screen'),
                     onPressed: () {
