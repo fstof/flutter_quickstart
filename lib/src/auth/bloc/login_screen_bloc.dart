@@ -41,7 +41,6 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
       var token = await _loginRepo.doLogin(
           username: event.username, password: event.password);
       if (token != null) {
-        yield LoginScreenStateSuccess();
         _analyticsBloc.add(AnalyticsEventSetUserDetails(
           username: event.username,
           email: event.username,
@@ -51,6 +50,7 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
           AnalyticsEventLogin('usernamePassword', 'success'),
         );
         _applicationBloc.add(ApplicationEventUserLoggedIn(event.username));
+        yield LoginScreenStateSuccess();
       } else {
         yield LoginScreenStateError();
       }
