@@ -60,6 +60,7 @@ class Router {
               title: state.title,
               message: state.message,
               duration: state.duration,
+              flushbarStyle: FlushbarStyle.GROUNDED,
             );
             await flush.show(context);
           } catch (error) {

@@ -54,6 +54,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   sl<Crashlytics>().crash();
                 },
               ),
+              RaisedButton( // this fails as it cannot find the Scaffold in the current BuildContext. 
+                            // for this to word, extract this button into its own widges to get a new BuildContext
+                child: Text('Stock Notification'),
+                onPressed: () {
+                  Scaffold.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('hello message'),
+                    ),
+                  );
+                },
+              ),
               RaisedButton(
                 child: Text('Notification'),
                 onPressed: () {

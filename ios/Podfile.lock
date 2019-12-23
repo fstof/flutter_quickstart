@@ -242,11 +242,11 @@ SPEC CHECKSUMS:
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   Firebase: 2d750c54cda57d5a6ae31212cfe5cc813c6be7e4
   firebase_analytics: d83001d25b9a58ca5eda8db0ef566c02d7af5258
-  firebase_core: 1ddb540658affe241faeb5ff5599756c3197af8e
+  firebase_core: 87e4c7cef68de46c0326ce2ee907fc7e365ead7e
   firebase_core_web: d501d8b946b60c8af265428ce483b0fff5ad52d1
-  firebase_crashlytics: 0aa7aee0650dc57aff432c5e3fb6ae3ad9fc106b
+  firebase_crashlytics: 0066966d67fee22065fdcf1c9703a97c4fdbae2e
   firebase_in_app_messaging: 5b14f2035975beeb06206aef7ce9499067e274cc
-  firebase_messaging: f1c71cfda85c725526bb0f2d82a6c817ab7aff6e
+  firebase_messaging: 73b3e7dd7b3b6a7e4bdac10d5295211ca4f87f90
   firebase_performance: bed42cee45cd3a44aadaf3e4fa18140f2fec3814
   firebase_remote_config: b909942ae016c4b1dc115bc3846ae6181808a98d
   FirebaseABTesting: 0d10f3cdc3fa00f3f175b5b56c1003c8e888299f
