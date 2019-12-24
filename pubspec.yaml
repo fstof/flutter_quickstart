@@ -27,6 +27,7 @@ dependencies:
   firebase_performance:
   firebase_remote_config:
   flushbar:
+  flutter_appauth:
   flutter:
     sdk: flutter
   flutter_bloc:

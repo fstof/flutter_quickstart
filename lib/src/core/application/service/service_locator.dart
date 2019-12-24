@@ -4,7 +4,9 @@ import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_performance/firebase_performance.dart';
+import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:flutter_quick_start/src/auth/auth.dart';
+import 'package:flutter_quick_start/src/core/analytics/bloc/analytics_bloc.dart';
 import 'package:flutter_quick_start/src/core/api/core_dio_client.dart';
 import 'package:flutter_quick_start/src/core/config/config.dart';
 import 'package:flutter_quick_start/src/core/config/remote_config.dart';
@@ -35,14 +37,27 @@ void setupServiceLocator() {
 
   // Login
   sl.registerLazySingleton(() => LoginApi());
-  sl.registerLazySingleton(() => LoginRepo(loginApi: sl(), tokenStorage: sl()));
+  sl.registerLazySingleton(() => LoginRepo(
+        loginApi: sl(),
+        tokenStorage: sl(),
+        appAuth: sl(),
+      ));
+
+  sl.registerLazySingleton(() => FlutterAppAuth());
 
   // Firebase
   sl.registerLazySingleton(() => Crashlytics.instance);
   sl.registerLazySingleton(() => FirebaseAnalytics());
-  sl.registerLazySingleton(() => FirebaseAnalyticsObserver(analytics: sl()));
+  sl.registerLazySingleton(() => FirebaseAnalyticsObserver(
+        analytics: sl(),
+      ));
   sl.registerLazySingleton(() => FirebasePerformance.instance);
   sl.registerLazySingleton(() => FirebaseMessaging());
 
   sl.registerLazySingleton(() => NotificationBloc());
+  sl.registerLazySingleton(() => AnalyticsBloc(
+        analytics: sl(),
+        analyticsObserver: sl(),
+        crashlytics: sl(),
+      ));
 }

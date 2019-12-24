@@ -45,6 +45,11 @@ android {
         versionName flutterVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+
+        manifestPlaceholders = [
+            'appAuthRedirectScheme': 'dev.stofberg.quickstart://oauth-callback'
+        ]
+
     }
 
     buildTypes {

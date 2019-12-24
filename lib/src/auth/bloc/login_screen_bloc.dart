@@ -30,6 +30,8 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
     yield LoginScreenStateLoading();
     if (event is LoginScreenEventLoginPressed) {
       yield* _mapLoginScreenEventLoginPressedToState(event);
+    } else if (event is LoginScreenEventOAuthLoginPressed) {
+      yield* _mapLoginScreenEventOAuthLoginPressedToState(event);
     } else {
       yield* _mapUnhandledEventToState();
     }
@@ -46,11 +48,45 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
           email: event.username,
           userId: event.username,
         ));
-        _analyticsBloc.add(
-          AnalyticsEventLogin('usernamePassword', 'success'),
-        );
+        _analyticsBloc.add(AnalyticsEventLogin('usernamePassword', 'success'));
         _applicationBloc.add(ApplicationEventUserLoggedIn(event.username));
         yield LoginScreenStateSuccess();
+      } else {
+        yield LoginScreenStateError();
+      }
+    } on RepositoryException catch (e) {
+      _logger.w('repository failed', e);
+      yield LoginScreenStateError();
+    } catch (e) {
+      _logger.e('Unknown error', e);
+      yield LoginScreenStateError();
+    }
+  }
+
+  Stream<LoginScreenState> _mapLoginScreenEventOAuthLoginPressedToState(
+      LoginScreenEventOAuthLoginPressed state) async* {
+    try {
+      var token = await _loginRepo.initiateOAuth();
+      if (token != null) {
+        yield LoginScreenStateSuccess();
+
+        _logger.i('authorizationAdditionalParameters');
+        token.authorizationAdditionalParameters.forEach((key, val) {
+          _logger.d('$key: $val');
+        });
+
+        _logger.i('tokenAdditionalParameters');
+        token.tokenAdditionalParameters.forEach((key, val) {
+          _logger.d('$key: $val');
+        });
+
+        // _analyticsBloc.add(AnalyticsEventSetUserDetails(
+        //   username: event.username,
+        //   email: event.username,
+        //   userId: event.username,
+        // ));
+        _analyticsBloc.add(AnalyticsEventLogin('oauth', 'success'));
+        _applicationBloc.add(ApplicationEventUserLoggedIn(token.accessToken));
       } else {
         yield LoginScreenStateError();
       }
@@ -79,6 +115,8 @@ class LoginScreenEventLoginPressed extends LoginScreenEvent {
   @override
   List<Object> get props => [username, password];
 }
+
+class LoginScreenEventOAuthLoginPressed extends LoginScreenEvent {}
 
 class LoginScreenState extends Equatable {
   @override

@@ -1,4 +1,9 @@
 PODS:
+  - AppAuth (1.2.0):
+    - AppAuth/Core (= 1.2.0)
+    - AppAuth/ExternalUserAgent (= 1.2.0)
+  - AppAuth/Core (1.2.0)
+  - AppAuth/ExternalUserAgent (1.2.0)
   - Crashlytics (3.14.0):
     - Fabric (~> 1.10.2)
   - Fabric (1.10.2)
@@ -23,6 +28,9 @@ PODS:
   - Firebase/RemoteConfig (6.9.0):
     - Firebase/CoreOnly
     - FirebaseRemoteConfig (~> 4.4.1)
+  - Firebase/Performance (6.9.0):
+    - Firebase/CoreOnly
+    - FirebasePerformance (~> 3.1.4)
   - firebase_analytics (0.0.1):
     - Firebase/Analytics (~> 6.0)
     - Firebase/Core
@@ -118,6 +126,9 @@ PODS:
     - "GoogleUtilities/NSData+zlib (~> 6.2)"
     - Protobuf (>= 3.9.2, ~> 3.9)
   - Flutter (1.0.0)
+  - flutter_appauth (0.0.1):
+    - AppAuth (= 1.2.0)
+    - Flutter
   - flutter_secure_storage (3.3.1):
     - Flutter
   - FMDB (2.7.5):
@@ -180,12 +191,16 @@ DEPENDENCIES:
   - firebase_performance (from `.symlinks/plugins/firebase_performance/ios`)
   - firebase_remote_config (from `.symlinks/plugins/firebase_remote_config/ios`)
   - Flutter (from `Flutter`)
+  - firebase_performance (from `.symlinks/plugins/firebase_performance/ios`)
+  - Flutter (from `Flutter`)
+  - flutter_appauth (from `.symlinks/plugins/flutter_appauth/ios`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
 
 SPEC REPOS:
   trunk:
+    - AppAuth
     - Crashlytics
     - Fabric
     - Firebase
@@ -230,6 +245,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_remote_config/ios"
   Flutter:
     :path: Flutter
+  firebase_performance:
+    :path: ".symlinks/plugins/firebase_performance/ios"
+  Flutter:
+    :path: Flutter
+  flutter_appauth:
+    :path: ".symlinks/plugins/flutter_appauth/ios"
   flutter_secure_storage:
     :path: ".symlinks/plugins/flutter_secure_storage/ios"
   path_provider:
@@ -238,6 +259,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sqflite/ios"
 
 SPEC CHECKSUMS:
+  AppAuth: bce82c76043657c99d91e7882e8a9e1a93650cd4
   Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   Firebase: 2d750c54cda57d5a6ae31212cfe5cc813c6be7e4
@@ -249,6 +271,7 @@ SPEC CHECKSUMS:
   firebase_messaging: 73b3e7dd7b3b6a7e4bdac10d5295211ca4f87f90
   firebase_performance: bed42cee45cd3a44aadaf3e4fa18140f2fec3814
   firebase_remote_config: b909942ae016c4b1dc115bc3846ae6181808a98d
+  firebase_performance: bed42cee45cd3a44aadaf3e4fa18140f2fec3814
   FirebaseABTesting: 0d10f3cdc3fa00f3f175b5b56c1003c8e888299f
   FirebaseAnalytics: 5d9ccbf46ed25d3ec9304d263f85bddf1e93e2d2
   FirebaseAnalyticsInterop: d48b6ab67bcf016a05e55b71fc39c61c0cb6b7f3
@@ -262,6 +285,7 @@ SPEC CHECKSUMS:
   FirebasePerformance: f34a8250a9ff3c969e18bf89990486962354d9a2
   FirebaseRemoteConfig: 03efa57106f9b6f7afe36658de4a9c67c803d3a8
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  flutter_appauth: df12d7d65012a380f1ab11311866cfcbfd55370f
   flutter_secure_storage: 7953c38a04c3fdbb00571bcd87d8e3b5ceb9daec
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   GoogleAppMeasurement: 0ae90be1cc4dad40f4a27fc767ef59fa032ec87b
