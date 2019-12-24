@@ -23,7 +23,7 @@ class _AppState extends State<App> {
     _applicationBloc = ApplicationBloc(applicationDao: sl());
     _analyticsBloc = sl();
 
-    _applicationBloc.dispatch(ApplicationEventAppStarted());
+    _applicationBloc.add(ApplicationEventAppStarted());
   }
 
   @override

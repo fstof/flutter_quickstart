@@ -49,7 +49,7 @@ class _SampleTabNavigationScreenState extends State<SampleTabNavigationScreen>
   @override
   void dispose() {
     super.dispose();
-    _tabNavigationScreenBloc?.dispose();
+    _tabNavigationScreenBloc?.close();
   }
 
   @override
@@ -127,7 +127,7 @@ class _SampleTabNavigationScreenState extends State<SampleTabNavigationScreen>
   }
 
   void _sendCurrentTabToAnalytics() {
-    widget._analyticsBloc.dispatch(
+    widget._analyticsBloc.add(
       AnalyticsEventScreenView('TabNumber_$selectedIndex'),
     );
   }

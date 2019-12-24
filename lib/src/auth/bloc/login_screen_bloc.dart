@@ -44,15 +44,15 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
           username: event.username, password: event.password);
       if (token != null) {
         yield LoginScreenStateSuccess();
-        _analyticsBloc.dispatch(AnalyticsEventSetUserDetails(
+        _analyticsBloc.add(AnalyticsEventSetUserDetails(
           username: event.username,
           email: event.username,
           userId: event.username,
         ));
-        _analyticsBloc.dispatch(
+        _analyticsBloc.add(
           AnalyticsEventLogin('usernamePassword', 'success'),
         );
-        _applicationBloc.dispatch(ApplicationEventUserLoggedIn(event.username));
+        _applicationBloc.add(ApplicationEventUserLoggedIn(event.username));
       } else {
         yield LoginScreenStateError();
       }
@@ -82,16 +82,16 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
           logger.d('$key: $val');
         });
 
-        // _analyticsBloc.dispatch(AnalyticsEventSetUserDetails(
+        // _analyticsBloc.add(AnalyticsEventSetUserDetails(
         //   username: event.username,
         //   email: event.username,
         //   userId: event.username,
         // ));
-        // _analyticsBloc.dispatch(
+        // _analyticsBloc.add(
         //   AnalyticsEventLogin('usernamePassword', 'success'),
         // );
         _applicationBloc
-            .dispatch(ApplicationEventUserLoggedIn(token.accessToken));
+            .add(ApplicationEventUserLoggedIn(token.accessToken));
       } else {
         yield LoginScreenStateError();
       }
