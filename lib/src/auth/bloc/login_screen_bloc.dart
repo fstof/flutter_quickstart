@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_quick_start/src/auth/repo/login_repo.dart';
-import 'package:flutter_quick_start/src/core/analytics/bloc/analytics_bloc.dart';
 import 'package:flutter_quick_start/src/core/core.dart';
 import 'package:flutter_quick_start/src/core/exception/exceptions.dart';
 
@@ -10,16 +9,16 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
   final _logger = getLogger();
 
   ApplicationBloc _applicationBloc;
-  AnalyticsBloc _analyticsBloc;
+  AnalyticsService _analyticsService;
   LoginRepo _loginRepo;
 
   LoginScreenBloc({
     @required ApplicationBloc applicationBloc,
-    @required AnalyticsBloc analyticsBloc,
+    @required AnalyticsService analyticsService,
     @required LoginRepo loginRepo,
   })  : _applicationBloc = applicationBloc,
         _loginRepo = loginRepo,
-        _analyticsBloc = analyticsBloc,
+        _analyticsService = analyticsService,
         super();
 
   @override
@@ -43,12 +42,14 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
       var token = await _loginRepo.doLogin(
           username: event.username, password: event.password);
       if (token != null) {
-        _analyticsBloc.add(AnalyticsEventSetUserDetails(
+        _analyticsService.setUserDetails(
+          // .add(AnalyticsEventSetUserDetails(
           username: event.username,
           email: event.username,
           userId: event.username,
-        ));
-        _analyticsBloc.add(AnalyticsEventLogin('usernamePassword', 'success'));
+        );
+        _analyticsService.logLogin(method: 'usernamePassword', status: 'success');
+        // .add(AnalyticsEventLogin('usernamePassword', 'success'));
         _applicationBloc.add(ApplicationEventUserLoggedIn(event.username));
         yield LoginScreenStateSuccess();
       } else {
@@ -80,12 +81,13 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
           _logger.d('$key: $val');
         });
 
-        // _analyticsBloc.add(AnalyticsEventSetUserDetails(
+        // _analyticsService.add(AnalyticsEventSetUserDetails(
         //   username: event.username,
         //   email: event.username,
         //   userId: event.username,
         // ));
-        _analyticsBloc.add(AnalyticsEventLogin('oauth', 'success'));
+        _analyticsService.logLogin(method: 'oauth', status: 'success');
+        // .add(AnalyticsEventLogin('oauth', 'success'));
         _applicationBloc.add(ApplicationEventUserLoggedIn(token.accessToken));
       } else {
         yield LoginScreenStateError();

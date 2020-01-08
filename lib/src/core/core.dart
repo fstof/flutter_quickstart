@@ -1,3 +1,4 @@
+export 'analytics/service/analytics_service.dart';
 export 'application/bloc/application_bloc.dart';
 export 'application/service/service_locator.dart';
 export 'config/config.dart';
@@ -8,4 +9,3 @@ export 'logging/logger.dart';
 export 'navigation/routing/route_names.dart';
 export 'navigation/service/navigation_service.dart';
 export 'notification/notification_bloc.dart';
-export 'analytics/bloc/analytics_bloc.dart';

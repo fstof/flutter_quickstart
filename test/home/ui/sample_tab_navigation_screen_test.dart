@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_quick_start/src/core/analytics/bloc/analytics_bloc.dart';
 import 'package:flutter_quick_start/src/home/ui/sample_tab_navigation_screen.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../mock_classes.dart';
 import '../../mock_service_locator.dart';
 import '../../test_utils.dart';
 
@@ -15,14 +12,7 @@ void main() {
     });
 
     testWidgets('confirm tab interaction', (WidgetTester tester) async {
-      await tester.pumpWidget(
-        buildTestableWidget(
-          BlocProvider<AnalyticsBloc>(
-            create: (BuildContext context) => AnalyticsBlocMock(),
-            child: SampleTabNavigationScreen(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(buildTestableWidget(SampleTabNavigationScreen()));
 
       // all tabs are visible
       expect(find.byIcon(Icons.ac_unit), findsOneWidget);

@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_quick_start/src/core/analytics/bloc/analytics_bloc.dart';
 import 'package:flutter_quick_start/src/core/core.dart';
 
 import '../bloc/sample_tab_navigation_screen_bloc.dart';
@@ -18,7 +17,7 @@ class _SampleTabNavigationScreenState extends State<SampleTabNavigationScreen>
     with SingleTickerProviderStateMixin, RouteAware {
   SampleTabNavigationScreenBloc _tabNavigationScreenBloc;
   NavigationService _navigationService;
-  AnalyticsBloc _analyticsBloc;
+  AnalyticsService _analyticsService;
   final FirebaseAnalyticsObserver observer = sl();
 
   TabController _controller;
@@ -27,7 +26,7 @@ class _SampleTabNavigationScreenState extends State<SampleTabNavigationScreen>
   @override
   void initState() {
     super.initState();
-    _analyticsBloc = BlocProvider.of(context);
+    _analyticsService = sl();
     _tabNavigationScreenBloc = SampleTabNavigationScreenBloc();
     _navigationService = sl();
     _controller = TabController(
@@ -126,8 +125,9 @@ class _SampleTabNavigationScreenState extends State<SampleTabNavigationScreen>
   }
 
   void _sendCurrentTabToAnalytics() {
-    _analyticsBloc.add(
-      AnalyticsEventScreenView('TabNumber_$selectedIndex'),
-    );
+    _analyticsService.logScreenView(screenName: 'TabNumber_$selectedIndex');
+    // .add(
+    //   AnalyticsEventScreenView('TabNumber_$selectedIndex'),
+    // );
   }
 }

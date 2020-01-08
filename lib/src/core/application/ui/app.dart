@@ -1,7 +1,6 @@
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_quick_start/src/core/analytics/bloc/analytics_bloc.dart';
 import 'package:flutter_quick_start/src/core/notification/push_handler.dart';
 
 import '../../core.dart';
@@ -16,7 +15,6 @@ class _AppState extends State<App> {
   NavigationService _navigationService;
   PushHandler _pushHandler;
   ApplicationBloc _applicationBloc;
-  AnalyticsBloc _analyticsBloc;
   NotificationBloc _notificationBloc;
 
   @override
@@ -27,11 +25,6 @@ class _AppState extends State<App> {
       applicationDao: sl(),
       appConfig: sl(),
       remoteConfig: sl(),
-    );
-    _analyticsBloc = AnalyticsBloc(
-      analytics: sl(),
-      analyticsObserver: sl(),
-      crashlytics: sl(),
     );
     _notificationBloc = sl();
     _pushHandler = PushHandler(_notificationBloc, sl());
@@ -44,7 +37,6 @@ class _AppState extends State<App> {
   void dispose() {
     super.dispose();
     _applicationBloc.close();
-    _analyticsBloc.close();
     _notificationBloc.close();
   }
 
@@ -53,7 +45,6 @@ class _AppState extends State<App> {
     return MultiBlocProvider(
         providers: [
           BlocProvider<ApplicationBloc>(create: (_) => _applicationBloc),
-          BlocProvider<AnalyticsBloc>(create: (_) => _analyticsBloc),
           BlocProvider<NotificationBloc>(create: (_) => _notificationBloc),
         ],
         child: MultiBlocListener(

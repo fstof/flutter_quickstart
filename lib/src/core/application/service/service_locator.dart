@@ -6,7 +6,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:flutter_quick_start/src/auth/auth.dart';
-import 'package:flutter_quick_start/src/core/analytics/bloc/analytics_bloc.dart';
 import 'package:flutter_quick_start/src/core/api/core_dio_client.dart';
 import 'package:flutter_quick_start/src/core/config/config.dart';
 import 'package:flutter_quick_start/src/core/config/remote_config.dart';
@@ -54,10 +53,16 @@ void setupServiceLocator() {
   sl.registerLazySingleton(() => FirebasePerformance.instance);
   sl.registerLazySingleton(() => FirebaseMessaging());
 
-  sl.registerLazySingleton(() => NotificationBloc()); // not exactly happy about this one here as it is a bloc and should be provided
-  sl.registerLazySingleton(() => AnalyticsBloc(
+  sl.registerLazySingleton(() =>
+      NotificationBloc()); // not exactly happy about this one here as it is a bloc and should be provided
+  sl.registerLazySingleton(() => AnalyticsService(
         analytics: sl(),
         analyticsObserver: sl(),
         crashlytics: sl(),
       ));
+  // sl.registerLazySingleton(() => AnalyticsBloc(
+  //       analytics: sl(),
+  //       analyticsObserver: sl(),
+  //       crashlytics: sl(),
+  //     ));
 }

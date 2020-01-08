@@ -10,4 +10,5 @@ void setupServiceLocatorMocks() {
   sl.registerLazySingleton<NavigationService>(() => NavigationServiceMock());
   sl.registerLazySingleton<FirebaseAnalyticsObserver>(
       () => FirebaseAnalyticsObserverMock());
+  sl.registerLazySingleton<AnalyticsService>(() => AnalyticsServiceMock());
 }

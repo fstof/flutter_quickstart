@@ -10,7 +10,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   ApplicationBloc _applicationBloc;
-  AnalyticsBloc _analyticsBloc;
   NotificationBloc _notificationBloc;
   LoginScreenBloc _loginScreenBloc;
 
@@ -21,11 +20,10 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
     _applicationBloc = BlocProvider.of(context);
-    _analyticsBloc = BlocProvider.of(context);
     _notificationBloc = BlocProvider.of(context);
     _loginScreenBloc = LoginScreenBloc(
       applicationBloc: _applicationBloc,
-      analyticsBloc: _analyticsBloc,
+      analyticsService: sl(),
       loginRepo: sl(),
     );
   }
