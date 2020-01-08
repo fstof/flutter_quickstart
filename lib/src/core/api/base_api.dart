@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_quick_start/src/core/core.dart';
 
-abstract class BaseDioApi {
-  final Dio _dio = sl();
+abstract class BaseApi {
+  final Dio _dio;
+
+  BaseApi(this._dio);
 
   Future<dynamic> httpGet(
     String url, {

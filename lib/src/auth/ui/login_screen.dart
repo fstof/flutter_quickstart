@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quick_start/src/auth/bloc/login_screen_bloc.dart';
-import 'package:flutter_quick_start/src/core/analytics/bloc/analytics_bloc.dart';
 import 'package:flutter_quick_start/src/core/core.dart';
 
 class LoginScreen extends StatefulWidget {

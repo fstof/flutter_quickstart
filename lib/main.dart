@@ -25,5 +25,8 @@ void main() {
   setupServiceLocator();
   runZoned<Future<void>>(() async {
     runApp(App());
-  }, onError: Crashlytics.instance.recordError);
+  }, onError: (dynamic exception, StackTrace stack, {dynamic context}) {
+    getLogger().wtf(exception);
+    Crashlytics.instance.recordError(exception, stack, context: context);
+  });
 }

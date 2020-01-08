@@ -1,8 +1,11 @@
-import 'package:flutter_quick_start/src/core/api/base_dio_api.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter_quick_start/src/core/api/base_api.dart';
 import 'package:flutter_quick_start/src/core/core.dart';
 import 'package:flutter_quick_start/src/core/exception/exceptions.dart';
 
-class LoginApi extends BaseDioApi {
+class LoginApi extends BaseApi {
+  LoginApi(Dio _dio) : super(_dio);
+
   Future<String> authenticate({String username, String password}) async {
     if (username == 'error') {
       throw ApiException(message: 'Error: 400', causedBy: 'bad username');

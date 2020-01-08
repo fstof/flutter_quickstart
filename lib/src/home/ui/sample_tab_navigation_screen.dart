@@ -9,9 +9,6 @@ import 'package:flutter_quick_start/src/core/core.dart';
 import '../bloc/sample_tab_navigation_screen_bloc.dart';
 
 class SampleTabNavigationScreen extends StatefulWidget {
-  final FirebaseAnalyticsObserver observer;
-  SampleTabNavigationScreen(this.observer);
-
   @override
   _SampleTabNavigationScreenState createState() =>
       _SampleTabNavigationScreenState();
@@ -22,6 +19,7 @@ class _SampleTabNavigationScreenState extends State<SampleTabNavigationScreen>
   SampleTabNavigationScreenBloc _tabNavigationScreenBloc;
   NavigationService _navigationService;
   AnalyticsBloc _analyticsBloc;
+  final FirebaseAnalyticsObserver observer = sl();
 
   TabController _controller;
   int selectedIndex = 0;
@@ -114,7 +112,7 @@ class _SampleTabNavigationScreenState extends State<SampleTabNavigationScreen>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    widget.observer.subscribe(this, ModalRoute.of(context));
+    observer.subscribe(this, ModalRoute.of(context));
   }
 
   @override

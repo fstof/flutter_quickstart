@@ -36,7 +36,7 @@ void setupServiceLocator() {
   sl.registerLazySingleton<Dio>(() => CoreDioClient(tokenStorage: sl()));
 
   // Login
-  sl.registerLazySingleton(() => LoginApi());
+  sl.registerLazySingleton(() => LoginApi(sl()));
   sl.registerLazySingleton(() => LoginRepo(
         loginApi: sl(),
         tokenStorage: sl(),
@@ -54,7 +54,7 @@ void setupServiceLocator() {
   sl.registerLazySingleton(() => FirebasePerformance.instance);
   sl.registerLazySingleton(() => FirebaseMessaging());
 
-  sl.registerLazySingleton(() => NotificationBloc());
+  sl.registerLazySingleton(() => NotificationBloc()); // not exactly happy about this one here as it is a bloc and should be provided
   sl.registerLazySingleton(() => AnalyticsBloc(
         analytics: sl(),
         analyticsObserver: sl(),

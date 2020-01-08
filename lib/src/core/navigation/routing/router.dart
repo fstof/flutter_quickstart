@@ -33,7 +33,7 @@ class Router {
         );
       case ROUTE_TABS:
         return _buildRoute(
-          SampleTabNavigationScreen(sl()),
+          SampleTabNavigationScreen(),
           'SampleTabNavigationScreen',
         );
       case ROUTE_LOGIN:

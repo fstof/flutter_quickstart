@@ -23,7 +23,11 @@ class _AppState extends State<App> {
   void initState() {
     super.initState();
     _navigationService = sl();
-    _applicationBloc = ApplicationBloc(applicationDao: sl());
+    _applicationBloc = ApplicationBloc(
+      applicationDao: sl(),
+      appConfig: sl(),
+      remoteConfig: sl(),
+    );
     _analyticsBloc = AnalyticsBloc(
       analytics: sl(),
       analyticsObserver: sl(),
@@ -48,12 +52,9 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
-          // BlocProvider.value(value: _applicationBloc),
-          // BlocProvider.value(value: _analyticsBloc),
-          // BlocProvider.value(value: _notificationBloc),
-          BlocProvider<ApplicationBloc>(builder: (_) => _applicationBloc),
-          BlocProvider<AnalyticsBloc>(builder: (_) => _analyticsBloc),
-          BlocProvider<NotificationBloc>(builder: (_) => _notificationBloc),
+          BlocProvider<ApplicationBloc>(create: (_) => _applicationBloc),
+          BlocProvider<AnalyticsBloc>(create: (_) => _analyticsBloc),
+          BlocProvider<NotificationBloc>(create: (_) => _notificationBloc),
         ],
         child: MultiBlocListener(
           listeners: [

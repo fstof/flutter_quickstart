@@ -8,12 +8,16 @@ import '../dao/application_dao.dart';
 
 class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
   final _logger = getLogger();
-  final RemoteConfig _remoteConfig = sl();
-  final AppConfig _appConfig = sl();
-
+  RemoteConfig _remoteConfig;
+  AppConfig _appConfig;
   ApplicationDao _applicationDao;
-  ApplicationBloc({@required ApplicationDao applicationDao})
-      : this._applicationDao = applicationDao;
+  ApplicationBloc({
+    @required ApplicationDao applicationDao,
+    @required RemoteConfig remoteConfig,
+    @required AppConfig appConfig,
+  })  : this._applicationDao = applicationDao,
+        this._remoteConfig = remoteConfig,
+        this._appConfig = appConfig;
 
   @override
   ApplicationState get initialState => ApplicationStateLoggedOut();

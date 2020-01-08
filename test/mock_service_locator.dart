@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/observer.dart';
 import 'package:flutter_quick_start/src/core/core.dart';
 import 'package:get_it/get_it.dart';
 
@@ -7,4 +8,6 @@ GetIt sl = GetIt.instance;
 
 void setupServiceLocatorMocks() {
   sl.registerLazySingleton<NavigationService>(() => NavigationServiceMock());
+  sl.registerLazySingleton<FirebaseAnalyticsObserver>(
+      () => FirebaseAnalyticsObserverMock());
 }

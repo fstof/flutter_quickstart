@@ -1,4 +1,3 @@
-import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quick_start/src/core/analytics/bloc/analytics_bloc.dart';
@@ -11,9 +10,7 @@ import '../../test_utils.dart';
 
 void main() {
   group('sample tab navication tests:', () {
-    FirebaseAnalyticsObserver analyticsObserver;
     setUp(() {
-      analyticsObserver = FirebaseAnalyticsObserverMock();
       setupServiceLocatorMocks();
     });
 
@@ -22,7 +19,7 @@ void main() {
         buildTestableWidget(
           BlocProvider<AnalyticsBloc>(
             create: (BuildContext context) => AnalyticsBlocMock(),
-            child: SampleTabNavigationScreen(analyticsObserver),
+            child: SampleTabNavigationScreen(),
           ),
         ),
       );
