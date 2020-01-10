@@ -43,8 +43,11 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_driver:
+    sdk: flutter
   mockito:
   pedantic:
+  test:
 
 
 # For information on the generic Dart part of this file, see the

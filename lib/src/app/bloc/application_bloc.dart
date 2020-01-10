@@ -46,11 +46,11 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
       } else {
         yield ApplicationStateLoggedOut();
       }
-    } on DaoException catch (e) {
-      _logger.w('storage failed', e);
+    } on DaoException catch (e, stackTrace) {
+      _logger.w('storage failed', e, stackTrace);
       yield ApplicationStateLoggedOut();
-    } catch (e) {
-      _logger.e('Unknown error', e);
+    } catch (e, stackTrace) {
+      _logger.e('Unknown error', e, stackTrace);
       yield ApplicationStateLoggedOut();
     }
   }

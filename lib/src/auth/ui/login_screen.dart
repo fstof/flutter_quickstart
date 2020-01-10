@@ -59,11 +59,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 TextField(
+                  key: Key('__username_text_field__'),
                   decoration: InputDecoration(labelText: 'Username Label'),
                   controller: _usernameController,
                 ),
                 SizedBox(height: 8),
                 TextField(
+                  key: Key('__password_text_field__'),
                   decoration: InputDecoration(labelText: 'Password Label'),
                   controller: _passwordController,
                   obscureText: true,

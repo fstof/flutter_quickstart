@@ -22,7 +22,9 @@ abstract class BaseDao {
 
     return DataItem(
       key: key,
-      lastUpdated: DateTime.fromMillisecondsSinceEpoch(lastUpdated['value']),
+      lastUpdated: lastUpdated == null
+          ? null
+          : DateTime.fromMillisecondsSinceEpoch(lastUpdated['value']),
       data: data,
     );
   }
