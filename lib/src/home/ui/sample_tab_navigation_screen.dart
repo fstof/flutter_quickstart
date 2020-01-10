@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_quick_start/src/core/core.dart';
+import 'package:flutter_quick_start/src/core/index.dart';
 
 import '../bloc/sample_tab_navigation_screen_bloc.dart';
 

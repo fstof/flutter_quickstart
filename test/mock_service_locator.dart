@@ -1,5 +1,5 @@
 import 'package:firebase_analytics/observer.dart';
-import 'package:flutter_quick_start/src/core/core.dart';
+import 'package:flutter_quick_start/src/core/index.dart';
 import 'package:get_it/get_it.dart';
 
 import 'mock_classes.dart';

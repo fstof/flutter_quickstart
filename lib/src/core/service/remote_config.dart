@@ -1,6 +1,6 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart' as frc;
 
-import '../core.dart';
+import '../index.dart';
 
 class RemoteConfig {
   static const config_one = 'config_one';

@@ -1,7 +1,7 @@
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:logger/logger.dart';
 
-import '../application/service/service_locator.dart';
+import '../index.dart';
 
 class CustomLogger extends Logger {
   Crashlytics _crashlytics;

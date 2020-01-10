@@ -1,7 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 
-import '../logging/logger.dart';
-import 'notification_bloc.dart';
+import '../index.dart';
 
 class PushHandler {
   final _logger = getLogger();

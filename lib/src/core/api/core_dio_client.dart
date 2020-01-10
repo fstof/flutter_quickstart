@@ -2,10 +2,9 @@ import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_performance/firebase_performance.dart';
-import 'package:flutter_quick_start/src/core/storage/token_storage.dart';
 import 'package:meta/meta.dart';
 
-import '../core.dart';
+import '../index.dart';
 
 class CoreDioClient with DioMixin implements Dio {
   final _logger = getLogger();

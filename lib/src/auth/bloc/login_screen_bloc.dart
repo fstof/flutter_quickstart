@@ -1,9 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_quick_start/src/auth/repo/login_repo.dart';
-import 'package:flutter_quick_start/src/core/core.dart';
-import 'package:flutter_quick_start/src/core/exception/exceptions.dart';
+import 'package:flutter_quick_start/src/app/index.dart';
+import 'package:flutter_quick_start/src/core/index.dart';
+
+import '../index.dart';
 
 class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
   final _logger = getLogger();
@@ -48,7 +49,8 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
           email: event.username,
           userId: event.username,
         );
-        _analyticsService.logLogin(method: 'usernamePassword', status: 'success');
+        _analyticsService.logLogin(
+            method: 'usernamePassword', status: 'success');
         // .add(AnalyticsEventLogin('usernamePassword', 'success'));
         _applicationBloc.add(ApplicationEventUserLoggedIn(event.username));
         yield LoginScreenStateSuccess();

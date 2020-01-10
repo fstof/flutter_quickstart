@@ -1,7 +1,7 @@
 import 'package:meta/meta.dart';
 
 import './remote_config.dart';
-import '../core.dart';
+import '../index.dart';
 
 class AppConfig {
   final _logger = getLogger();

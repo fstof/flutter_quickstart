@@ -1,10 +1,8 @@
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_quick_start/src/core/notification/push_handler.dart';
-
-import '../../core.dart';
-import '../../navigation/routing/router.dart';
+import 'package:flutter_quick_start/src/app/index.dart';
+import 'package:flutter_quick_start/src/core/index.dart';
 
 class App extends StatefulWidget {
   @override
@@ -22,7 +20,7 @@ class _AppState extends State<App> {
     super.initState();
     _navigationService = sl();
     _applicationBloc = ApplicationBloc(
-      applicationDao: sl(),
+      userRepo: sl(),
       appConfig: sl(),
       remoteConfig: sl(),
     );

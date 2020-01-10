@@ -1,21 +1,19 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_quick_start/src/core/core.dart';
+import 'package:flutter_quick_start/src/auth/index.dart';
+import 'package:flutter_quick_start/src/core/index.dart';
 import 'package:meta/meta.dart';
-
-import '../../exception/exceptions.dart';
-import '../dao/application_dao.dart';
 
 class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
   final _logger = getLogger();
   RemoteConfig _remoteConfig;
   AppConfig _appConfig;
-  ApplicationDao _applicationDao;
+  UserRepo _userRepo;
   ApplicationBloc({
-    @required ApplicationDao applicationDao,
+    @required UserRepo userRepo,
     @required RemoteConfig remoteConfig,
     @required AppConfig appConfig,
-  })  : this._applicationDao = applicationDao,
+  })  : this._userRepo = userRepo,
         this._remoteConfig = remoteConfig,
         this._appConfig = appConfig;
 
@@ -42,7 +40,7 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
       await _remoteConfig.initialise(FlavorConfig.isProd());
       _appConfig.initialise();
 
-      String user = await _applicationDao.getCurrentUser();
+      String user = await _userRepo.getCurrentUser();
       if (user != null) {
         yield ApplicationStateLoggedIn(user);
       } else {
@@ -60,7 +58,7 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
   Stream<ApplicationState> _mapApplicationEventUserLoggedInToState(
       ApplicationEventUserLoggedIn event) async* {
     try {
-      await _applicationDao.storeCurrentUser(event.loggedInUser);
+      await _userRepo.storeCurrentUser(event.loggedInUser);
       yield ApplicationStateLoggedIn(event.loggedInUser);
     } on DaoException catch (e) {
       _logger.w('storage failed', e);
@@ -74,7 +72,7 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
   Stream<ApplicationState> _mapApplicationEventUserLoggedOutToState(
       ApplicationEventUserLogOut event) async* {
     try {
-      await _applicationDao.removeCurrentUser();
+      await _userRepo.removeCurrentUser();
       yield ApplicationStateLoggedOut();
     } on DaoException catch (e) {
       _logger.w('storage failed', e);

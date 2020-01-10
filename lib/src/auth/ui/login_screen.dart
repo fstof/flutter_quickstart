@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_quick_start/src/auth/bloc/login_screen_bloc.dart';
-import 'package:flutter_quick_start/src/core/core.dart';
+import 'package:flutter_quick_start/src/app/index.dart';
+import 'package:flutter_quick_start/src/core/index.dart';
+
+import '../index.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
