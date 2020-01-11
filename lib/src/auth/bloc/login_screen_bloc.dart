@@ -1,10 +1,11 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_quick_start/src/app/index.dart';
-import 'package:flutter_quick_start/src/core/index.dart';
 
-import '../index.dart';
+import '../../app/bloc/index.dart';
+import '../../core/index.dart';
+import '../repo/login_repo.dart';
+import 'login_screen_events.dart';
+import 'login_screen_states.dart';
 
 class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
   final _logger = getLogger();
@@ -107,30 +108,3 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
     yield LoginScreenStateError();
   }
 }
-
-class LoginScreenEvent extends Equatable {
-  @override
-  List<Object> get props => [];
-}
-
-class LoginScreenEventLoginPressed extends LoginScreenEvent {
-  final String username, password;
-  LoginScreenEventLoginPressed(this.username, this.password);
-  @override
-  List<Object> get props => [username, password];
-}
-
-class LoginScreenEventOAuthLoginPressed extends LoginScreenEvent {}
-
-class LoginScreenState extends Equatable {
-  @override
-  List<Object> get props => [];
-}
-
-class LoginScreenStateInitial extends LoginScreenState {}
-
-class LoginScreenStateLoading extends LoginScreenState {}
-
-class LoginScreenStateSuccess extends LoginScreenState {}
-
-class LoginScreenStateError extends LoginScreenState {}

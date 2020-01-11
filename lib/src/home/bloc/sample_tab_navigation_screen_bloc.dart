@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+
+import 'sample_tab_navigation_screen_event.dart';
+import 'sample_tab_navigation_screen_state.dart';
 
 class SampleTabNavigationScreenBloc extends Bloc<TabEvent, TabState> {
   @override
@@ -9,22 +11,4 @@ class SampleTabNavigationScreenBloc extends Bloc<TabEvent, TabState> {
   Stream<TabState> mapEventToState(TabEvent event) async* {
     yield (TabState(event.newTab));
   }
-}
-
-class TabEvent extends Equatable {
-  final int newTab;
-  TabEvent(this.newTab);
-  @override
-  List<Object> get props => [newTab];
-  @override
-  String toString() => newTab.toString();
-}
-
-class TabState extends Equatable {
-  final int currentTab;
-  TabState(this.currentTab);
-  @override
-  List<Object> get props => [currentTab];
-  @override
-  String toString() => currentTab.toString();
 }

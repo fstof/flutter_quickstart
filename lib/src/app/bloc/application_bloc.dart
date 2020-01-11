@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter_quick_start/src/auth/index.dart';
-import 'package:flutter_quick_start/src/core/index.dart';
 import 'package:meta/meta.dart';
+
+import '../../auth/repo/user_repo.dart';
+import '../../core/index.dart';
+import 'application_event.dart';
+import 'application_state.dart';
 
 class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
   final _logger = getLogger();
@@ -82,40 +84,4 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
       yield ApplicationStateLoggedOut();
     }
   }
-}
-
-abstract class ApplicationEvent extends Equatable {
-  @override
-  List<Object> get props => [];
-}
-
-class ApplicationEventAppStarted extends ApplicationEvent {}
-
-class ApplicationEventUserLoggedIn extends ApplicationEvent {
-  final loggedInUser;
-
-  ApplicationEventUserLoggedIn(this.loggedInUser);
-
-  @override
-  List<Object> get props => [loggedInUser];
-}
-
-class ApplicationEventUserLogOut extends ApplicationEvent {}
-
-abstract class ApplicationState extends Equatable {
-  @override
-  List<Object> get props => [];
-}
-
-class ApplicationStateAppLoading extends ApplicationState {}
-
-class ApplicationStateLoggedOut extends ApplicationState {}
-
-class ApplicationStateLoggedIn extends ApplicationState {
-  final loggedInUser;
-
-  ApplicationStateLoggedIn(this.loggedInUser);
-
-  @override
-  List<Object> get props => [loggedInUser];
 }
