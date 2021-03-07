@@ -1,14 +1,15 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:meta/meta.dart';
 
-import 'notification_event.dart';
-import 'notification_state.dart';
+part 'notification_event.dart';
+part 'notification_state.dart';
 
 enum NotificationType { snackBar, dialog }
 enum SnackBarType { fixed, floating }
 
 class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
-  @override
-  NotificationState get initialState => NotificationState(time: DateTime.now());
+  NotificationBloc() : super(NotificationState(time: DateTime.now()));
 
   @override
   Stream<NotificationState> mapEventToState(

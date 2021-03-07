@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quick_start/src/core/index.dart';
+
+import '../../core/index.dart';
 
 class SampleNavigationScreen extends StatelessWidget {
   final _logger = getLogger();

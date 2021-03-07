@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_quick_start/src/core/index.dart';
+
+import '../../core/index.dart';
 
 class LoginApi extends BaseApi {
   LoginApi(Dio _dio) : super(_dio);

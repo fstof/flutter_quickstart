@@ -98,10 +98,9 @@ class CoreDioClient with DioMixin implements Dio {
         '[API_ERROR] error in ${DateTime.now().millisecondsSinceEpoch - start} ms. An Exception occurred when calling $path',
         dioError,
       );
-      await sl<Crashlytics>().recordError(
+      await sl<FirebaseCrashlytics>().recordError(
         dioError,
         StackTrace.fromString('No Stack available'),
-        context: 'CoreDioClient',
       );
       rethrow;
     } catch (error) {
@@ -109,10 +108,9 @@ class CoreDioClient with DioMixin implements Dio {
         '[API_ERROR] error in ${DateTime.now().millisecondsSinceEpoch - start} ms. An Exception occurred when calling $path',
         error,
       );
-      await sl<Crashlytics>().recordError(
+      await sl<FirebaseCrashlytics>().recordError(
         error,
         error['stacktrace'] ?? StackTrace.fromString('No Stack available'),
-        context: 'CoreDioClient',
       );
       rethrow;
     } finally {

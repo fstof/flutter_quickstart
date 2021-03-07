@@ -6,14 +6,14 @@ import '../../auth/index.dart' as auth;
 import '../../home/index.dart' as home;
 import '../index.dart';
 
-class Router {
+class MyRouter {
   static final _logger = getLogger();
 
   static Route<dynamic> generateRoute(RouteSettings routeSettings) {
     _logger.d('navigating to ${routeSettings.name}');
     Route route = auth.RouteGenerator.generateRoute(routeSettings) ??
         home.RouteGenerator.generateRoute(routeSettings) ??
-        Router.buildRoute(
+        MyRouter.buildRoute(
           UnknownRoute(),
           'unknown',
         );
@@ -24,7 +24,7 @@ class Router {
     return MaterialPageRoute(
       settings: RouteSettings(name: name),
       builder: (context) => BlocListener<NotificationBloc, NotificationState>(
-        bloc: sl<NotificationBloc>(),
+        cubit: sl<NotificationBloc>(),
         listener: (context, state) async {
           try {
             var flush = Flushbar(

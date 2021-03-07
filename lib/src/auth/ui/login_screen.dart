@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_quick_start/src/app/index.dart';
-import 'package:flutter_quick_start/src/core/index.dart';
 
-import '../index.dart';
+import '../../app/index.dart';
+import '../../core/index.dart';
+import '../bloc/login_screen_bloc.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -15,8 +15,8 @@ class _LoginScreenState extends State<LoginScreen> {
   NotificationBloc _notificationBloc;
   LoginScreenBloc _loginScreenBloc;
 
-  var _usernameController = TextEditingController(text: 'eve.holt@reqres.in');
-  var _passwordController = TextEditingController(text: 'password');
+  final _usernameController = TextEditingController(text: 'eve.holt@reqres.in');
+  final _passwordController = TextEditingController(text: 'password');
 
   @override
   void initState() {
@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       appBar: AppBar(title: Text('Login')),
       body: BlocListener(
-        bloc: _loginScreenBloc,
+        cubit: _loginScreenBloc,
         listener: (context, LoginScreenState state) {
           if (state is LoginScreenStateError) {
             _notificationBloc.add(NotificationEvent(message: 'Login Failed'));
@@ -72,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(height: 8),
                 BlocBuilder(
-                  bloc: _loginScreenBloc,
+                  cubit: _loginScreenBloc,
                   builder: (_, LoginScreenState state) {
                     if (state is LoginScreenStateLoading) {
                       return CircularProgressIndicator();

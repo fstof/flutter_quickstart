@@ -1,5 +1,6 @@
-import 'package:flutter_quick_start/src/app/index.dart';
 import 'package:meta/meta.dart';
+
+import '../../app/index.dart';
 
 class UserRepo {
   final ApplicationDao _applicationDao;

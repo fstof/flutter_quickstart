@@ -1,8 +1,9 @@
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_quick_start/src/app/index.dart';
-import 'package:flutter_quick_start/src/core/index.dart';
+
+import '../../app/index.dart';
+import '../../core/index.dart';
 
 class App extends StatefulWidget {
   @override
@@ -48,7 +49,7 @@ class _AppState extends State<App> {
         child: MultiBlocListener(
           listeners: [
             BlocListener<ApplicationBloc, ApplicationState>(
-              bloc: _applicationBloc,
+              cubit: _applicationBloc,
               listener: (_, state) {
                 if (state is ApplicationStateLoggedIn) {
                   _navigationService.navigateReplacement(ROUTE_HOME);
@@ -66,7 +67,7 @@ class _AppState extends State<App> {
             navigatorObservers: [sl<FirebaseAnalyticsObserver>()],
             initialRoute: ROUTE_SPLASH,
             navigatorKey: _navigationService.navigatorKey,
-            onGenerateRoute: Router.generateRoute,
+            onGenerateRoute: MyRouter.generateRoute,
           ),
         ));
   }

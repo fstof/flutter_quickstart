@@ -3,8 +3,9 @@ import 'dart:math';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_quick_start/src/app/index.dart';
-import 'package:flutter_quick_start/src/core/index.dart';
+
+import '../../app/index.dart';
+import '../../core/index.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -52,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
               RaisedButton(
                 child: Text('Crash!'),
                 onPressed: () {
-                  sl<Crashlytics>().crash();
+                  sl<FirebaseCrashlytics>().crash();
                 },
               ),
               RaisedButton(

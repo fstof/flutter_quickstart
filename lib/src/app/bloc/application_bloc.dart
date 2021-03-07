@@ -1,10 +1,12 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import '../../auth/repo/user_repo.dart';
 import '../../core/index.dart';
-import 'application_event.dart';
-import 'application_state.dart';
+
+part 'application_event.dart';
+part 'application_state.dart';
 
 class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
   final _logger = getLogger();
@@ -17,10 +19,8 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
     @required AppConfig appConfig,
   })  : this._userRepo = userRepo,
         this._remoteConfig = remoteConfig,
-        this._appConfig = appConfig;
-
-  @override
-  ApplicationState get initialState => ApplicationStateLoggedOut();
+        this._appConfig = appConfig,
+        super(ApplicationStateLoggedOut());
 
   @override
   Stream<ApplicationState> mapEventToState(ApplicationEvent event) async* {

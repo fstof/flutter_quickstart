@@ -1,4 +1,4 @@
-import 'package:equatable/equatable.dart';
+part of 'login_screen_bloc.dart';
 
 class LoginScreenState extends Equatable {
   @override

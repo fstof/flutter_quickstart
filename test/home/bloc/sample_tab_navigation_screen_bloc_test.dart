@@ -11,7 +11,7 @@ void main() {
     });
 
     test('test initial state', () async {
-      expect(bloc.initialState, TabState(0));
+      expect(bloc.state, TabState(0));
     });
 
     test('test tab change event', () async {

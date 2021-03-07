@@ -1,7 +1,4 @@
-import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
-
-import 'notification_bloc.dart';
+part of 'notification_bloc.dart';
 
 class NotificationEvent extends Equatable {
   final String title;

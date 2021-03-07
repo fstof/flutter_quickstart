@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 
-import 'sample_tab_navigation_screen_event.dart';
-import 'sample_tab_navigation_screen_state.dart';
+part 'sample_tab_navigation_screen_event.dart';
+part 'sample_tab_navigation_screen_state.dart';
 
 class SampleTabNavigationScreenBloc extends Bloc<TabEvent, TabState> {
-  @override
-  TabState get initialState => TabState(0);
+  SampleTabNavigationScreenBloc() : super(TabState(0));
 
   @override
   Stream<TabState> mapEventToState(TabEvent event) async* {

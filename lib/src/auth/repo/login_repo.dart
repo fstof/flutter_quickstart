@@ -1,8 +1,8 @@
 import 'package:flutter_appauth/flutter_appauth.dart';
-import 'package:flutter_quick_start/src/core/index.dart';
 import 'package:meta/meta.dart';
 
-import '../index.dart';
+import '../../core/index.dart';
+import '../api/login_api.dart';
 
 class LoginRepo {
   final _logger = getLogger();

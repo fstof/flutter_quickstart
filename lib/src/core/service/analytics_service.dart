@@ -6,12 +6,12 @@ import 'package:meta/meta.dart';
 class AnalyticsService {
   final FirebaseAnalytics _analytics;
   final FirebaseAnalyticsObserver analyticsObserver;
-  final Crashlytics _crashlytics;
+  final FirebaseCrashlytics _crashlytics;
 
   AnalyticsService({
     @required FirebaseAnalytics analytics,
     @required this.analyticsObserver,
-    @required Crashlytics crashlytics,
+    @required FirebaseCrashlytics crashlytics,
   })  : this._analytics = analytics,
         this._crashlytics = crashlytics;
 
@@ -22,8 +22,6 @@ class AnalyticsService {
   }) async {
     await _analytics.setUserId(userId.replaceAll(RegExp('[@\.]'), '_'));
     await _crashlytics.setUserIdentifier(userId);
-    await _crashlytics.setUserEmail(email);
-    await _crashlytics.setUserName(username);
   }
 
   void setUserProperty({String name, String value}) async {

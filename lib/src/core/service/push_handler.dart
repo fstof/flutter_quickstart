@@ -34,11 +34,37 @@ class PushHandler {
   }
 
   void setupPush() {
-    _firebaseMessaging.configure(
-      onMessage: _handleOnMessage,
-      onResume: _handleOnResume,
-      onLaunch: _handleOnLaunch,
-    );
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print('Got a message whilst in the foreground!');
+      print('Message data: ${message.data}');
+
+      if (message.notification != null) {
+        print('Message also contained a notification: ${message.notification}');
+      }
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('Got a message onMessageOpenedApp');
+      print('Message data: ${message.data}');
+
+      if (message.notification != null) {
+        print('Message also contained a notification: ${message.notification}');
+      }
+    });
+
+    FirebaseMessaging.onBackgroundMessage((message) async {
+      print('Got a message onBackgroundMessage');
+      print('Message data: ${message.data}');
+
+      if (message.notification != null) {
+        print('Message also contained a notification: ${message.notification}');
+      }
+    });
+
+    // _firebaseMessaging.configure(
+    //   onMessage: _handleOnMessage,
+    //   onResume: _handleOnResume,
+    //   onLaunch: _handleOnLaunch,
+    // );
   }
 
   Future<void> _handleOnMessage(Map<String, dynamic> message) async {

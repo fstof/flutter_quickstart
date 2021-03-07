@@ -4,7 +4,7 @@ import 'package:logger/logger.dart';
 import '../index.dart';
 
 class CustomLogger extends Logger {
-  Crashlytics _crashlytics;
+  FirebaseCrashlytics _crashlytics;
   CustomLogger() : super() {
     Logger.level = Level.verbose;
     _crashlytics = sl();

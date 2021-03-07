@@ -1,11 +1,13 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
-import '../../app/bloc/index.dart';
+import '../../app/bloc/application_bloc.dart';
 import '../../core/index.dart';
 import '../repo/login_repo.dart';
-import 'login_screen_events.dart';
-import 'login_screen_states.dart';
+
+part 'login_screen_events.dart';
+part 'login_screen_states.dart';
 
 class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
   final _logger = getLogger();
@@ -21,10 +23,7 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
   })  : _applicationBloc = applicationBloc,
         _loginRepo = loginRepo,
         _analyticsService = analyticsService,
-        super();
-
-  @override
-  LoginScreenState get initialState => LoginScreenStateInitial();
+        super(LoginScreenStateInitial());
 
   @override
   Stream<LoginScreenState> mapEventToState(LoginScreenEvent event) async* {

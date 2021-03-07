@@ -14,9 +14,12 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.2.2 <3.0.0"
+  sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  flutter:
+    sdk: flutter
+  
   dio:
   equatable:
   firebase_analytics:
@@ -28,8 +31,6 @@ dependencies:
   firebase_remote_config:
   flushbar:
   flutter_appauth:
-  flutter:
-    sdk: flutter
   flutter_bloc:
   get_it:
   json_store:

@@ -1,5 +1,6 @@
-import 'package:flutter_quick_start/src/core/index.dart';
 import 'package:json_store/json_store.dart';
+
+import '../../core/index.dart';
 
 class ApplicationDao extends BaseDao {
   static const CURRENT_USER_KEY = 'currentUser';

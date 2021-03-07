@@ -26,13 +26,13 @@ void registerServices(GetIt sl) {
   sl.registerLazySingleton(() => FlutterAppAuth());
 
   // Firebase
-  sl.registerLazySingleton(() => Crashlytics.instance);
+  sl.registerLazySingleton(() => FirebaseCrashlytics.instance);
   sl.registerLazySingleton(() => FirebaseAnalytics());
   sl.registerLazySingleton(() => FirebaseAnalyticsObserver(
         analytics: sl(),
       ));
   sl.registerLazySingleton(() => FirebasePerformance.instance);
-  sl.registerLazySingleton(() => FirebaseMessaging());
+  sl.registerLazySingleton(() => FirebaseMessaging.instance);
 
   sl.registerLazySingleton(() =>
       NotificationBloc()); // not exactly happy about this one here as it is a bloc and should be provided

@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-import 'notification_bloc.dart';
+part of 'notification_bloc.dart';
 
 class NotificationState extends Equatable {
   final String title;

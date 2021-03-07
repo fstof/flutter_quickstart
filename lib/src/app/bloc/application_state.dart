@@ -1,4 +1,4 @@
-import 'package:equatable/equatable.dart';
+part of 'application_bloc.dart';
 
 abstract class ApplicationState extends Equatable {
   @override
